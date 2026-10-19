@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="Coba alur pengadaan lengkap dalam 3 menit: Purchase Request, approval, QCF, PO, BAST, dan 3-way match.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Demo e-Procurement · Syamsul Siam">
+<meta property="og:title" content="BeliRapi · Demo e-Procurement">
 <meta property="og:description" content="Coba alur pengadaan lengkap dalam 3 menit: Purchase Request, approval, QCF, PO, BAST, dan 3-way match.">
 <meta property="og:image" content="https://syamsulsiam.github.io/og.jpg">
 <meta property="og:url" content="https://syamsulsiam.github.io/demo.html">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='29' fill='%23ffffff' stroke='%230E6A5B' stroke-width='5'/%3E%3Ctext x='32' y='41' font-family='Arial' font-weight='700' font-size='24' text-anchor='middle' fill='%230E6A5B'%3ESS%3C/text%3E%3C/svg%3E">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style>
-<title>Siam e-Procurement</title>
+<title>BeliRapi</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -169,7 +169,7 @@ body.touring main{padding-bottom:300px}
 <header class="top">
   <div class="wrap">
     <div class="brandrow">
-      <div class="brand"><div class="logo" aria-hidden="true">S</div><div style="min-width:0"><b>Siam e-Procurement</b><small><a href="index.html" style="color:inherit">&larr; Kembali ke situs</a> · data fiktif</small></div></div>
+      <div class="brand"><div class="logo" aria-hidden="true">B</div><div style="min-width:0"><b>BeliRapi</b><small><a href="index.html" style="color:inherit">&larr; Kembali ke situs</a> · data fiktif</small></div></div>
       <div class="row" style="flex-wrap:nowrap"><button class="btn small primary" data-act="tourStart">&#9654; Tur panduan</button><button class="btn small" data-act="reset" id="resetBtn">Reset</button></div>
     </div>
     <nav class="tabs" id="tabs" aria-label="Menu utama"></nav>
@@ -537,7 +537,7 @@ function ctaBlock(){return `<section class="cta"><div style="min-width:0;max-wid
  <div class="contact"><a class="btn small" href="index.html#kontak">Jadwalkan konsultasi</a><button class="btn small" data-act="copy" data-t="syamsulsiam@gmail.com">syamsulsiam@gmail.com</button><button class="btn small" data-act="copy" data-t="+62 878-8762-5841">+62 878-8762-5841</button></div></section>`}
 
 /* ---------- PAPER DOCUMENTS ---------- */
-function kop(){return `<div class="kop"><div><b>${COMPANY.name}</b><div>${COMPANY.addr}</div><div>NPWP ${COMPANY.npwp}</div></div><div style="text-align:right;color:#555">Dokumen sistem<br>Siam e-Procurement</div></div>`}
+function kop(){return `<div class="kop"><div><b>${COMPANY.name}</b><div>${COMPANY.addr}</div><div>NPWP ${COMPANY.npwp}</div></div><div style="text-align:right;color:#555">Dokumen sistem<br>BeliRapi</div></div>`}
 function sign(list){return `<div class="sign">${list.map(([role,name,st,date])=>`<div><div>${role}</div><div class="box">${st==='ok'?`<span class="stamp">DISETUJUI<br>${fd(date)}</span>`:st==='no'?`<span class="stamp no">DITOLAK<br>${fd(date)}</span>`:''}</div><div style="border-top:1px solid #333;padding-top:2px"><b>${esc(name)}</b></div></div>`).join('')}</div>`}
 function meta(pairs){return `<div class="meta">${pairs.map(([a,b])=>`<div><span>${a}</span><span>: ${b}</span></div>`).join('')}</div>`}
 function sampleFor(kind){
@@ -746,7 +746,7 @@ function tourSync(){
 function welcome(){
  let seen=false;try{seen=localStorage.getItem('siam-tour-seen')==='1'}catch(e){}
  if(seen)return;
- $('#modal').innerHTML=`<div class="overlay" role="dialog" aria-modal="true" aria-label="Selamat datang"><div class="welcome"><span class="eyebrow">Demo e-procurement</span><h2>Lihat bagaimana pengadaan yang rapi bekerja</h2><p class="muted">Anda akan mengikuti 1 pembelian printer: diajukan, disetujui, dibandingkan dari 3 vendor, dipesan, diterima, lalu dibayar. Cukup tekan tombol yang ditunjukkan. Sekitar 3 menit.</p><button class="btn primary big" data-act="tourStart">&#9654; Mulai tur panduan</button><button class="btn big" data-act="welcomeSkip">Saya mau jelajahi sendiri</button><p class="muted" style="font-size:12.5px">Semua data fiktif. Isian Anda hanya tersimpan di perangkat ini.</p></div></div>`;
+ $('#modal').innerHTML=`<div class="overlay" role="dialog" aria-modal="true" aria-label="Selamat datang"><div class="welcome"><span class="eyebrow">BeliRapi · demo e-procurement</span><h2>Lihat bagaimana pengadaan yang rapi bekerja</h2><p class="muted">Anda akan mengikuti 1 pembelian printer: diajukan, disetujui, dibandingkan dari 3 vendor, dipesan, diterima, lalu dibayar. Cukup tekan tombol yang ditunjukkan. Sekitar 3 menit.</p><button class="btn primary big" data-act="tourStart">&#9654; Mulai tur panduan</button><button class="btn big" data-act="welcomeSkip">Saya mau jelajahi sendiri</button><p class="muted" style="font-size:12.5px">Semua data fiktif. Isian Anda hanya tersimpan di perangkat ini.</p></div></div>`;
 }
 
 render();
