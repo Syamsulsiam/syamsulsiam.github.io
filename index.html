@@ -180,7 +180,7 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     <span class="eyebrow">Konsultan Procurement & Commercial · Jakarta–Bogor & remote</span>
     <h1>Biaya vendor turun. <span class="mark">PO keluar dua kali lebih cepat.</span></h1>
     <p class="lead">Saya membantu startup, klinik, F&B, dan developer properti membangun proses pengadaan yang rapi dan hemat, tanpa harus merekrut Head of Procurement full-time.</p>
-    <div class="ctas"><a class="btn solid" href="#kontak">Jadwalkan konsultasi 30 menit</a><a class="btn" href="demo.html">&#9654; Coba demo 3 menit</a></div>
+    <div class="ctas"><a class="btn solid" href="#kontak">Jadwalkan konsultasi 30 menit</a><a class="btn" href="demo.html">&#9654; Coba BeliRapi (3 menit)</a></div>
     <p class="small"><a href="#layanan">Lihat paket & harga</a> · <a href="contoh-laporan.html">Contoh laporan</a></p>
     <p class="small">13+ tahun di procurement · Sarjana Hukum (S.H.) · SAP & Oracle ERP</p>
   </div>
@@ -247,9 +247,9 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <section id="demo"><div class="w demo">
   <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
     <span class="eyebrow">Coba langsung</span>
-    <h2>Demo sistem e-procurement</h2>
+    <h2>BeliRapi: sistem e-procurement yang mudah dipakai</h2>
     <p class="lead">Ikuti tur 3 menit: satu pembelian printer dari diajukan, disetujui, dibandingkan dari 3 vendor, sampai dibayar. Cukup tekan tombol yang ditunjukkan. Bisa dibuka di HP.</p>
-    <div class="ctas"><a class="btn solid" href="demo.html">Coba demo e-procurement</a><a class="btn" id="hcLink" href="contoh-laporan.html">Lihat contoh laporan</a></div>
+    <div class="ctas"><a class="btn solid" href="demo.html">Coba BeliRapi</a><a class="btn" id="hcLink" href="contoh-laporan.html">Lihat contoh laporan</a></div>
   </div>
   <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
     <div class="flow"><span class="s">Purchase Request</span><span class="a">→</span><span class="s">Approval berjenjang</span><span class="a">→</span><span class="s">RFQ</span><span class="a">→</span><span class="s">QCF & skoring</span><span class="a">→</span><span class="s">PO</span><span class="a">→</span><span class="s">BAST</span><span class="a">→</span><span class="s">3-way match</span><span class="a">→</span><span class="s">Bayar</span></div>
@@ -276,14 +276,14 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <div class="offer">
     <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
       <span class="eyebrow">Toolkit siap pakai</span>
-      <h2>Procurement Starter Kit</h2>
+      <h2>BeliRapi Starter Kit</h2>
       <p>Template Excel yang saya pakai sehari-hari, sudah dengan rumus. Isi, cetak, dan langsung dipakai tim Anda.</p>
       <ul><li>Purchase Request</li><li>QCF dengan skoring otomatis</li><li>Purchase Order + PPN</li><li>BAST / Goods Receipt</li><li>Evaluasi kinerja vendor</li><li>Daftar vendor (vendor master)</li><li>Matriks approval</li><li>Panduan pemakaian</li></ul>
     </div>
     <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start">
       <p style="font-family:var(--f-display);font-size:32px;font-weight:800;line-height:1">Rp750 rb</p>
       <p class="small">Gratis untuk klien paket mana pun.</p>
-      <a class="btn solid" href="#kontak" data-pre="Saya ingin membeli Procurement Starter Kit.">Pesan toolkit</a>
+      <a class="btn solid" href="#kontak" data-pre="Saya ingin membeli BeliRapi Starter Kit.">Pesan toolkit</a>
     </div>
   </div>
 </div></section>
@@ -312,7 +312,7 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <form id="f" novalidate>
     <label for="fn">Nama & jabatan<input id="fn" placeholder="mis. Rina, CFO"></label>
     <label for="fc">Perusahaan<input id="fc" placeholder="Nama perusahaan"></label>
-    <label for="fp">Paket yang diminati<select id="fp"><option>Belum tahu, mau diskusi dulu</option><option>Procurement Health Check</option><option>Setup Procurement dari Nol</option><option>Strategic Sourcing & Negosiasi</option><option>Review Kontrak Vendor</option><option>Fractional Head of Procurement</option><option>Procurement Starter Kit</option></select></label>
+    <label for="fp">Paket yang diminati<select id="fp"><option>Belum tahu, mau diskusi dulu</option><option>Procurement Health Check</option><option>Setup Procurement dari Nol</option><option>Strategic Sourcing & Negosiasi</option><option>Review Kontrak Vendor</option><option>Fractional Head of Procurement</option><option>BeliRapi Starter Kit</option></select></label>
     <label for="fm">Cerita singkat<textarea id="fm" rows="3" placeholder="mis. Belanja vendor IT kami naik 30% tahun ini"></textarea></label>
     <button class="btn solid" type="submit" style="background:var(--stamp);border-color:var(--stamp);color:var(--stamp-ink)">Susun pesan WhatsApp</button>
     <div id="out" hidden></div>
@@ -326,7 +326,7 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 (function(){
  function toast(m){var t=document.getElementById('t');t.innerHTML='<div class="toast" role="status"></div>';t.firstChild.textContent=m;clearTimeout(toast.x);toast.x=setTimeout(function(){t.innerHTML=''},2200)}
  function copy(v){try{navigator.clipboard.writeText(v).then(function(){toast('Disalin: '+v)},function(){toast(v)})}catch(e){toast(v)}}
- document.addEventListener('click',function(e){var b=e.target.closest('[data-copy]');if(b){copy(b.dataset.copy)}var p=e.target.closest('[data-pre]');if(p){var s=document.getElementById('fp');s.value='Procurement Starter Kit'}});
+ document.addEventListener('click',function(e){var b=e.target.closest('[data-copy]');if(b){copy(b.dataset.copy)}var p=e.target.closest('[data-pre]');if(p){var s=document.getElementById('fp');s.value='BeliRapi Starter Kit'}});
  document.getElementById('f').addEventListener('submit',function(e){
   e.preventDefault();
   var n=document.getElementById('fn').value.trim(),c=document.getElementById('fc').value.trim(),p=document.getElementById('fp').value,m=document.getElementById('fm').value.trim();
