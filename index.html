@@ -29,11 +29,11 @@
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --paper:#0E1513; --card:#16201D; --ink:#E6EEEA; --muted:#9CABA5; --rule:#2A3632;
-  --stamp:#48BFA5; --stamp-ink:#062019; --stamp-soft:#173A33; --mark:#D9C552; --mark-ink:#13201C;
+  --stamp:#48BFA5; --stamp-ink:#062019; --stamp-soft:#173A33; --mark:#5E5A22; --mark-ink:#13201C;
   --band:#0A2621; --band-ink:#E6EEEA; --band-muted:#9DB5AC; color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#0E1513; --card:#16201D; --ink:#E6EEEA; --muted:#9CABA5; --rule:#2A3632;
-  --stamp:#48BFA5; --stamp-ink:#062019; --stamp-soft:#173A33; --mark:#D9C552; --mark-ink:#13201C;
+  --stamp:#48BFA5; --stamp-ink:#062019; --stamp-soft:#173A33; --mark:#5E5A22; --mark-ink:#13201C;
   --band:#0A2621; --band-ink:#E6EEEA; --band-muted:#9DB5AC; color-scheme:dark}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -49,7 +49,7 @@ h3{font-size:20px;font-weight:700;line-height:1.2}
 p{margin:0}
 .lead{font-size:clamp(17px,2vw,19px);color:var(--muted);max-width:58ch}
 .eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--stamp);font-weight:500}
-.mark{background:linear-gradient(transparent 58%,var(--mark) 58%,var(--mark) 92%,transparent 92%);color:var(--mark-ink);padding:0 .08em}
+.mark{background:linear-gradient(transparent 58%,var(--mark) 58%,var(--mark) 92%,transparent 92%);color:inherit;padding:0 .08em}
 .mono{font-family:var(--f-mono)}
 .num{font-variant-numeric:tabular-nums}
 /* header */
