@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Coba alur pengadaan lengkap dalam 3 menit: Purchase Request, approval, QCF, PO, BAST, dan 3-way match.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Demo e-Procurement · Syamsul Siam">
+<meta property="og:description" content="Coba alur pengadaan lengkap dalam 3 menit: Purchase Request, approval, QCF, PO, BAST, dan 3-way match.">
+<meta property="og:image" content="https://syamsulsiam.github.io/og.jpg">
+<meta property="og:url" content="https://syamsulsiam.github.io/demo.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='29' fill='%23ffffff' stroke='%230E6A5B' stroke-width='5'/%3E%3Ctext x='32' y='41' font-family='Arial' font-weight='700' font-size='24' text-anchor='middle' fill='%230E6A5B'%3ESS%3C/text%3E%3C/svg%3E">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Siam e-Procurement</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: top bar + scrollable tabs, single working column; documents open as white paper sheets over the app */
+:root{
+  --bg:#F3F5F2; --surface:#FFFFFF; --sunk:#E9EDE9; --ink:#17211E; --muted:#5B6863; --line:#D8DED9;
+  --accent:#0E6A5B; --accent-ink:#FFFFFF; --accent-soft:#DCEFEA;
+  --ok:#1D7440; --ok-soft:#DDF1E3; --warn:#9A5B00; --warn-soft:#FBEBCF; --bad:#B0242C; --bad-soft:#F8DEDF; --info:#2B4E9B; --info-soft:#E0E8F8;
+  --paper:#FFFFFF; --paper-ink:#1A1A1A; --paper-line:#BFC4C1; --stamp:#0E6A5B;
+  --f-display:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-body:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#101614; --surface:#18201D; --sunk:#202A27; --ink:#E5ECE9; --muted:#9AA8A2; --line:#2D3834;
+  --accent:#43B79F; --accent-ink:#06201A; --accent-soft:#163A33;
+  --ok:#5DCB86; --ok-soft:#173726; --warn:#E6AC4E; --warn-soft:#3A2C12; --bad:#F07A80; --bad-soft:#3E1A1C; --info:#8FB0F2; --info-soft:#1B2740;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#101614; --surface:#18201D; --sunk:#202A27; --ink:#E5ECE9; --muted:#9AA8A2; --line:#2D3834;
+  --accent:#43B79F; --accent-ink:#06201A; --accent-soft:#163A33;
+  --ok:#5DCB86; --ok-soft:#173726; --warn:#E6AC4E; --warn-soft:#3A2C12; --bad:#F07A80; --bad-soft:#3E1A1C; --info:#8FB0F2; --info-soft:#1B2740;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.brandrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px 6px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.logo{width:32px;height:32px;border-radius:8px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-weight:800;font-size:15px;flex:none}
+.brand b{font-family:var(--f-display);font-weight:800;font-size:16px;letter-spacing:-.01em;display:block;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand small{color:var(--muted);font-size:12px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding-bottom:0}
+.tabs::-webkit-scrollbar{display:none}
+.tab{border:0;background:none;padding:10px 12px;border-bottom:2px solid transparent;color:var(--muted);font-weight:600;white-space:nowrap;cursor:pointer}
+.tab[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tab:focus-visible,.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+main{padding-block:20px 40px}
+h1{font-family:var(--f-display);font-size:24px;line-height:1.2;letter-spacing:-.02em;margin:0;text-wrap:balance}
+h2{font-family:var(--f-display);font-size:17px;margin:0;letter-spacing:-.01em;text-wrap:balance}
+h3{font-size:14px;margin:0}
+p{margin:0}
+.muted{color:var(--muted)}
+.mono{font-family:var(--f-mono);font-size:12.5px}
+.num{font-variant-numeric:tabular-nums}
+.stack{display:flex;flex-direction:column;gap:16px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.between{justify-content:space-between}
+.pagehead{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;justify-content:space-between;margin-bottom:18px}
+.eyebrow{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;min-width:0}
+.grid{display:grid;gap:12px}
+.kpis{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.kpi .v{font-family:var(--f-display);font-size:22px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.kpi .l{font-size:12px;color:var(--muted)}
+.two{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}
+@media (max-width:820px){.two{grid-template-columns:minmax(0,1fr)}}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);padding:8px 12px;border-radius:8px;font-weight:600;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.danger{color:var(--bad);border-color:var(--bad)}
+.btn.small{padding:5px 9px;font-size:12.5px}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.pill{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.p-approval{background:var(--warn-soft);color:var(--warn)}
+.p-sourcing{background:var(--info-soft);color:var(--info)}
+.p-po,.p-gr,.p-inv{background:var(--accent-soft);color:var(--accent)}
+.p-done{background:var(--ok-soft);color:var(--ok)}
+.p-rejected{background:var(--bad-soft);color:var(--bad)}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;background:var(--sunk);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right}
+tr.click{cursor:pointer}
+tr.click:hover td{background:var(--sunk)}
+tr.win td{background:var(--ok-soft)}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.step{display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:8px;background:var(--sunk);font-size:12.5px;font-weight:600;color:var(--muted)}
+.step.done{background:var(--ok-soft);color:var(--ok)}
+.step.now{background:var(--accent);color:var(--accent-ink)}
+.step.stop{background:var(--bad-soft);color:var(--bad)}
+.arrow{color:var(--muted);font-size:12px}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:12.5px;font-weight:600;color:var(--muted);min-width:0}
+input.i,select.i,textarea.i{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:8px 10px;width:100%;min-width:0;color:var(--ink);font-weight:500}
+input.cell{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:5px 7px;width:110px;text-align:right;font-variant-numeric:tabular-nums}
+input.cell.s{width:64px}
+.formgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.note{border-left:3px solid var(--accent);background:var(--accent-soft);padding:10px 12px;border-radius:0 8px 8px 0;font-size:13px}
+.note.warn{border-color:var(--warn);background:var(--warn-soft)}
+.note.bad{border-color:var(--bad);background:var(--bad-soft)}
+.subtabs{display:flex;gap:6px;flex-wrap:wrap}
+.subtab{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-weight:600;font-size:13px;cursor:pointer;color:var(--muted)}
+.subtab[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chain{display:flex;flex-direction:column;gap:8px}
+.chain .a{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:10px 12px;border:1px solid var(--line);border-radius:8px}
+.doclist{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.doccard{display:flex;flex-direction:column;gap:8px;justify-content:space-between}
+.code{font-family:var(--f-mono);font-size:11.5px;color:var(--accent);font-weight:500}
+.cta{margin-top:28px;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;background:var(--ink);color:var(--bg);border-radius:12px;padding:18px}
+.cta .muted{color:inherit;opacity:.75}
+.cta .btn{background:transparent;color:inherit;border-color:currentColor}
+.contact{display:flex;flex-wrap:wrap;gap:8px}
+.bar{height:8px;border-radius:4px;background:var(--sunk);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;font-weight:600;z-index:50;max-width:calc(100% - 32px)}
+/* paper modal */
+.overlay{position:fixed;inset:0;background:rgba(10,16,14,.55);z-index:40;overflow-y:auto;padding:calc(16px + env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px))}
+.sheetbar{max-width:800px;margin:0 auto 10px;display:flex;justify-content:space-between;gap:8px;align-items:center;color:#fff}
+.sheetbar .btn{background:#fff;color:#111;border-color:#fff}
+.paper{max-width:800px;margin:0 auto;background:var(--paper);color:var(--paper-ink);padding:32px clamp(16px,5vw,44px);border-radius:4px;box-shadow:0 10px 40px rgba(0,0,0,.3);font-size:12.5px;color-scheme:light}
+.paper .kop{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--paper-ink);padding-bottom:10px;margin-bottom:14px}
+.paper .kop b{font-size:15px}
+.paper h4{text-align:center;margin:6px 0 2px;font-size:15px;letter-spacing:.06em;text-transform:uppercase}
+.paper .docno{text-align:center;font-family:var(--f-mono);font-size:11.5px;margin-bottom:14px}
+.paper table{font-size:11.5px}
+.paper th{background:#EEF0EE;color:#333;border:1px solid var(--paper-line);text-transform:none;letter-spacing:0;font-size:11px}
+.paper td{border:1px solid var(--paper-line)}
+.paper .meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:4px 20px;margin-bottom:12px}
+.paper .meta div{display:flex;gap:6px}
+.paper .meta span:first-child{min-width:110px;color:#555}
+.paper .sign{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin-top:22px;text-align:center}
+.paper .sign .box{height:64px;display:grid;place-items:center}
+.paper .stamp{border:2px solid var(--stamp);color:var(--stamp);font-weight:800;font-size:10.5px;padding:2px 8px;transform:rotate(-6deg);letter-spacing:.06em;border-radius:4px}
+.paper .stamp.no{border-color:#B0242C;color:#B0242C}
+.paper .blank{border-bottom:1px dotted #888;min-height:20px}
+.paper .sec{margin-top:12px;font-weight:700;border-bottom:1px solid var(--paper-line);padding-bottom:2px}
+.paper .tblw{overflow-x:auto}
+.paper .fine{font-size:10.5px;color:#555;margin-top:12px}
+/* guided tour */
+.tour{position:fixed;z-index:35;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:min(380px,calc(100% - 32px));background:var(--surface);border:2px solid var(--accent);border-radius:14px;box-shadow:0 18px 50px -12px rgba(0,0,0,.35);padding:16px;display:flex;flex-direction:column;gap:10px}
+.tour .prog{display:flex;gap:4px}.tour .prog i{flex:1;height:5px;border-radius:3px;background:var(--sunk)}.tour .prog i.on{background:var(--accent)}
+.tour h3{font-family:var(--f-display);font-size:17px}
+.tour p{font-size:14px;color:var(--ink)}
+.tour .k{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.tour-pill{position:fixed;z-index:35;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+body.touring main{padding-bottom:300px}
+.tour-hl{position:relative;box-shadow:0 0 0 3px var(--surface),0 0 0 6px var(--warn)!important}
+@media (prefers-reduced-motion:no-preference){.tour-hl{animation:hl 1.4s ease-in-out infinite}@keyframes hl{50%{box-shadow:0 0 0 3px var(--surface),0 0 0 10px var(--warn-soft)}}}
+.welcome{max-width:520px;margin:10vh auto 0;background:var(--surface);color:var(--ink);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:14px}
+.welcome h2{font-size:22px}
+.btn.big{padding:12px 16px;font-size:15px;justify-content:center}
+.intro{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;background:var(--accent-soft);border-radius:10px;padding:14px 16px;margin-bottom:16px}
+@media (max-width:600px){.tour{right:0;left:0;bottom:0;width:100%;border-radius:14px 14px 0 0;border-width:2px 0 0;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}}
+@media (prefers-reduced-motion:no-preference){.toast{animation:up .2s ease-out}@keyframes up{from{transform:translate(-50%,8px);opacity:0}}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brandrow">
+      <div class="brand"><div class="logo" aria-hidden="true">S</div><div style="min-width:0"><b>Siam e-Procurement</b><small><a href="index.html" style="color:inherit">&larr; Kembali ke situs</a> · data fiktif</small></div></div>
+      <div class="row" style="flex-wrap:nowrap"><button class="btn small primary" data-act="tourStart">&#9654; Tur panduan</button><button class="btn small" data-act="reset" id="resetBtn">Reset</button></div>
+    </div>
+    <nav class="tabs" id="tabs" aria-label="Menu utama"></nav>
+  </div>
+</header>
+<main class="wrap" id="app"></main>
+<div id="modal"></div>
+<div id="toastHost"></div>
+<div id="tourHost"></div>
+
+<script>
+(function(){
+const KEY='siam-eproc-v1';
+const COMPANY={name:'PT Contoh Maju Bersama',addr:'Jl. Pajajaran No. 88, Bogor 16143',npwp:'00.000.000.0-000.000'};
+const PPN=0.11;
+const APPROVERS={atasan:{role:'Atasan Langsung',name:'Budi Santoso'},finance:{role:'Finance Controller',name:'Maya Rahmawati'},direktur:{role:'Direktur Operasional',name:'Hendra Wijaya'}};
+const CATS=['IT Hardware & Lisensi','ATK & Percetakan','Jasa Facility','Furnitur','Peralatan Kantor'];
+const WEIGHTS={price:60,tech:25,lead:15};
+
+function seed(){
+ const V=[
+  {id:'V01',name:'PT Nusantara Komputindo',cat:'IT Hardware & Lisensi',pic:'Andi',phone:'0251-800 1101',rating:4.5,status:'Aktif'},
+  {id:'V02',name:'CV Mitra Data Solusi',cat:'IT Hardware & Lisensi',pic:'Sari',phone:'021-555 2020',rating:4.0,status:'Aktif'},
+  {id:'V03',name:'PT Arunika Teknologi',cat:'IT Hardware & Lisensi',pic:'Yoga',phone:'021-555 3131',rating:4.2,status:'Aktif'},
+  {id:'V04',name:'CV Sinar ATK Bogor',cat:'ATK & Percetakan',pic:'Dewi',phone:'0251-833 4040',rating:4.1,status:'Aktif'},
+  {id:'V05',name:'PT Kertas Prima Niaga',cat:'ATK & Percetakan',pic:'Rudi',phone:'021-555 5050',rating:3.8,status:'Aktif'},
+  {id:'V06',name:'Toko Grafika Abadi',cat:'ATK & Percetakan',pic:'Lina',phone:'0251-836 6060',rating:3.5,status:'Aktif'},
+  {id:'V07',name:'PT Bersih Sentosa Facility',cat:'Jasa Facility',pic:'Joko',phone:'021-555 7070',rating:4.3,status:'Aktif'},
+  {id:'V08',name:'PT Prima Layan Gedung',cat:'Jasa Facility',pic:'Tari',phone:'021-555 8080',rating:3.9,status:'Aktif'},
+  {id:'V09',name:'CV Cahaya Facility Services',cat:'Jasa Facility',pic:'Eko',phone:'0251-839 9090',rating:3.7,status:'Aktif'},
+  {id:'V10',name:'PT Ergo Furnitur Indonesia',cat:'Furnitur',pic:'Fajar',phone:'021-555 1010',rating:4.0,status:'Aktif'},
+  {id:'V11',name:'CV Meja Kursi Sejahtera',cat:'Furnitur',pic:'Wati',phone:'0251-840 1111',rating:3.6,status:'Daftar hitam'}
+ ];
+ const ap=(k,st,date,note)=>({key:k,status:st,date:date||'',note:note||''});
+ const R=[
+  {id:'R1',prNo:'PR/2026/10/001',date:'2026-10-01',requester:'Nadia Putri',dept:'Finance',cc:'CC-210',needBy:'2026-10-20',cat:'IT Hardware & Lisensi',title:'Laptop untuk tim Finance',just:'Penggantian 5 laptop berusia >5 tahun yang sering rusak dan menghambat closing bulanan.',
+   items:[{name:'Laptop 14" Core i5, RAM 16GB, SSD 512GB',qty:5,uom:'unit',est:15000000}],
+   approvals:[ap('atasan','ok','2026-10-01'),ap('finance','ok','2026-10-02')],
+   invited:['V01','V02','V03'],
+   quotes:{V01:{p:[14200000],pay:'NET 30',lead:7,war:'24 bulan',tech:5},V02:{p:[13600000],pay:'NET 14',lead:14,war:'12 bulan',tech:4},V03:{p:[14000000],pay:'NET 30',lead:10,war:'24 bulan',tech:4}},
+   qcf:{decided:true,winner:'V01',note:'Skor tertinggi: garansi 24 bulan, spesifikasi sesuai penuh, kirim 7 hari. Selisih harga 4,4% dari penawaran terendah tertutup oleh garansi dan kecepatan kirim.',date:'2026-10-06'},
+   po:{no:'PO/2026/10/001',date:'2026-10-07',addr:'Kantor Pusat, Lantai 3 — Finance'},
+   gr:{no:'GR/2026/10/001',date:'2026-10-14',rec:[5],note:'Diterima lengkap, kondisi baik, serial number tercatat.'},
+   inv:{no:'INV/NK/1026/118',date:'2026-10-15',amount:78810000},paid:{date:'2026-11-14'}},
+  {id:'R2',prNo:'PR/2026/10/002',date:'2026-10-05',requester:'Arif Hidayat',dept:'IT',cc:'CC-310',needBy:'2026-11-01',cat:'IT Hardware & Lisensi',title:'Perpanjangan lisensi Microsoft 365 Business',just:'Lisensi 40 user habis 31 Oktober 2026; dibutuhkan untuk email dan dokumen seluruh karyawan.',
+   items:[{name:'Microsoft 365 Business Standard (1 tahun)',qty:40,uom:'user',est:3300000}],
+   approvals:[ap('atasan','ok','2026-10-05'),ap('finance','ok','2026-10-07'),ap('direktur','pending')],invited:[],quotes:{},qcf:{decided:false}},
+  {id:'R3',prNo:'PR/2026/10/003',date:'2026-10-08',requester:'Lia Kurnia',dept:'General Affairs',cc:'CC-120',needBy:'2026-10-25',cat:'ATK & Percetakan',title:'ATK kebutuhan kuartal IV',just:'Stok ATK kuartal IV untuk 120 karyawan berdasarkan pemakaian rata-rata kuartal III.',
+   items:[{name:'Kertas HVS A4 80gr',qty:50,uom:'rim',est:55000},{name:'Tinta printer original (set)',qty:20,uom:'set',est:350000},{name:'Map plastik kancing',qty:100,uom:'pcs',est:8000}],
+   approvals:[ap('atasan','ok','2026-10-08'),ap('finance','ok','2026-10-09')],
+   invited:['V04','V05','V06'],
+   quotes:{V04:{p:[52000,330000,7500],pay:'NET 30',lead:3,war:'—',tech:4},V05:{p:[50000,360000,7000],pay:'NET 14',lead:5,war:'—',tech:4},V06:{p:[54000,340000,8000],pay:'COD',lead:2,war:'—',tech:3}},
+   qcf:{decided:false}},
+  {id:'R4',prNo:'PR/2026/10/004',date:'2026-10-09',requester:'Lia Kurnia',dept:'General Affairs',cc:'CC-120',needBy:'2026-11-01',cat:'Jasa Facility',title:'Jasa cleaning service gedung (6 bulan)',just:'Kontrak cleaning service berakhir 31 Oktober 2026. Lingkup: 4 lantai, 6 petugas, Senin–Sabtu.',
+   items:[{name:'Jasa cleaning service 6 petugas',qty:6,uom:'bulan',est:18000000}],
+   approvals:[ap('atasan','ok','2026-10-09'),ap('finance','ok','2026-10-10'),ap('direktur','ok','2026-10-11')],
+   invited:['V07','V08','V09'],
+   quotes:{V07:{p:[17000000],pay:'NET 30',lead:7,war:'Ganti petugas 1x24 jam',tech:5},V08:{p:[16500000],pay:'NET 30',lead:14,war:'Ganti petugas 3x24 jam',tech:3},V09:{p:[17800000],pay:'NET 14',lead:7,war:'Ganti petugas 2x24 jam',tech:4}},
+   qcf:{decided:true,winner:'V07',note:'Skor teknis tertinggi (BPJS petugas lengkap, supervisor on-site). Hasil negosiasi turun dari Rp17,5 jt ke Rp17 jt/bulan.',date:'2026-10-15'},
+   po:{no:'PO/2026/10/002',date:'2026-10-16',addr:'Gedung Kantor Pusat, Lantai 1–4'}},
+  {id:'R5',prNo:'PR/2026/10/005',date:'2026-10-16',requester:'Dimas Pratama',dept:'Customer Service',cc:'CC-410',needBy:'2026-11-15',cat:'Furnitur',title:'Kursi ergonomis tim CS',just:'12 agen CS bekerja 8 jam/hari; kursi lama rusak dan memicu keluhan pegal.',
+   items:[{name:'Kursi ergonomis mesh, sandaran kepala',qty:12,uom:'unit',est:2200000}],
+   approvals:[ap('atasan','pending'),ap('finance','pending')],invited:[],quotes:{},qcf:{decided:false}},
+  {id:'R6',prNo:'PR/2026/10/006',date:'2026-10-12',requester:'Sinta Maharani',dept:'Marketing',cc:'CC-510',needBy:'2026-10-30',cat:'Peralatan Kantor',title:'Mesin kopi espresso pantry',just:'Fasilitas pantry untuk tamu dan karyawan.',
+   items:[{name:'Mesin kopi espresso komersial',qty:1,uom:'unit',est:45000000}],
+   approvals:[ap('atasan','ok','2026-10-12'),ap('finance','no','2026-10-13','Tidak ada anggaran capex Q4 untuk pos ini. Ajukan ulang di budget 2027.')],invited:[],quotes:{},qcf:{decided:false}}
+ ];
+ return {vendors:V,reqs:R,seq:{pr:6,po:2,gr:1}};
+}
+
+let S;
+try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){S=null}
+if(!S||!S.reqs)S=seed();
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+
+let UI={view:'dash',rid:null,sub:null,filter:'all',resetArm:false,draft:null};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const rp=n=>'Rp '+Math.round(n||0).toLocaleString('id-ID');
+const rpS=n=>{n=n||0;if(n>=1e9)return 'Rp '+(n/1e9).toLocaleString('id-ID',{maximumFractionDigits:2})+' M';if(n>=1e6)return 'Rp '+(n/1e6).toLocaleString('id-ID',{maximumFractionDigits:1})+' jt';return rp(n)};
+const fd=d=>{if(!d)return '—';const x=new Date(d+'T00:00:00');return x.toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'})};
+const today=()=>{const d=new Date();return d.toISOString().slice(0,10)};
+const V=id=>S.vendors.find(v=>v.id===id)||{name:'?'};
+const R=id=>S.reqs.find(r=>r.id===id);
+const estTotal=r=>r.items.reduce((a,i)=>a+i.qty*i.est,0);
+function chainFor(total){return total<=10000000?['atasan']:total<=100000000?['atasan','finance']:['atasan','finance','direktur']}
+function minQuotes(total){return total<=10000000?1:3}
+function rule(total){return total<=10000000?'≤ Rp10 jt: 1 penawaran, approval Atasan':total<=100000000?'Rp10–100 jt: min. 3 penawaran + QCF, approval Atasan & Finance':'> Rp100 jt: min. 3 penawaran + QCF + BA Negosiasi, approval Atasan, Finance & Direktur'}
+function qTotal(r,vid){const q=r.quotes[vid];if(!q||!q.p)return null;let t=0;for(let k=0;k<r.items.length;k++){const p=+q.p[k];if(!(p>0))return null;t+=p*r.items[k].qty}return t}
+function qcfRows(r){
+ const rows=r.invited.map(v=>({vid:v,q:r.quotes[v]||{},total:qTotal(r,v)})).filter(x=>x.total);
+ if(!rows.length)return [];
+ const minT=Math.min(...rows.map(x=>x.total));
+ const leads=rows.map(x=>+x.q.lead||0).filter(x=>x>0);const minL=leads.length?Math.min(...leads):1;
+ rows.forEach(x=>{x.sp=minT/x.total*100;x.st=(+x.q.tech||0)/5*100;x.sl=(+x.q.lead>0)?minL/(+x.q.lead)*100:0;x.score=(x.sp*WEIGHTS.price+x.st*WEIGHTS.tech+x.sl*WEIGHTS.lead)/100});
+ const best=Math.max(...rows.map(x=>x.score));rows.forEach(x=>{x.rec=x.score===best;x.low=x.total===minT});
+ return rows;
+}
+function stage(r){
+ if(r.approvals.some(a=>a.status==='no'))return 'rejected';
+ if(r.approvals.some(a=>a.status!=='ok'))return 'approval';
+ if(!r.qcf||!r.qcf.decided)return 'sourcing';
+ if(!r.po)return 'po';
+ if(!r.gr)return 'gr';
+ if(!r.inv||!r.paid)return 'inv';
+ return 'done';
+}
+const STAGES={approval:['Menunggu approval','p-approval'],sourcing:['RFQ & QCF','p-sourcing'],po:['Siap terbit PO','p-po'],gr:['Menunggu barang/jasa','p-gr'],inv:['Invoice & pembayaran','p-inv'],done:['Selesai','p-done'],rejected:['Ditolak','p-rejected']};
+const pill=r=>{const s=STAGES[stage(r)];return `<span class="pill ${s[1]}">${s[0]}</span>`};
+const poTotal=r=>{const t=qTotal(r,r.qcf.winner)||0;return {sub:t,ppn:Math.round(t*PPN),tot:Math.round(t*(1+PPN))}};
+function grValue(r){const q=r.quotes[r.qcf.winner];return r.items.reduce((a,i,k)=>a+(r.gr?(+r.gr.rec[k]||0):0)*(+q.p[k]),0)}
+
+function toast(m){const h=$('#toastHost');h.innerHTML=`<div class="toast" role="status">${esc(m)}</div>`;clearTimeout(toast.t);toast.t=setTimeout(()=>h.innerHTML='',2400)}
+
+/* ---------- NAV ---------- */
+const NAV=[['dash','Dasbor'],['list','Pengadaan'],['new','+ Purchase Request'],['vendors','Vendor'],['docs','Dokumen & SOP']];
+function renderTabs(){ $('#tabs').innerHTML=NAV.map(([k,l])=>`<button class="tab" data-act="nav" data-v="${k}" ${UI.view===k||(k==='list'&&UI.view==='detail')?'aria-current="page"':''}>${l}</button>`).join('') }
+
+/* ---------- DASHBOARD ---------- */
+function vDash(){
+ const rs=S.reqs;const cnt=s=>rs.filter(r=>stage(r)===s).length;
+ const decided=rs.filter(r=>r.qcf&&r.qcf.decided);
+ const spend=decided.reduce((a,r)=>a+(qTotal(r,r.qcf.winner)||0),0);
+ const est=decided.reduce((a,r)=>a+estTotal(r),0);
+ const save=est-spend;
+ const flowCounts=[['approval','Approval'],['sourcing','RFQ & QCF'],['po','PO'],['gr','Penerimaan'],['inv','Invoice'],['done','Selesai']];
+ const max=Math.max(1,...flowCounts.map(f=>cnt(f[0])));
+ const needs=rs.filter(r=>['approval','sourcing','po','gr','inv'].includes(stage(r)));
+ return `
+ <div class="pagehead"><div><div class="eyebrow">Oktober 2026</div><h1>Dasbor pengadaan</h1></div>
+  <button class="btn primary" data-act="nav" data-v="new">+ Buat Purchase Request</button></div>
+ <div class="intro"><div style="min-width:0;max-width:640px"><b>Ini simulasi sistem pengadaan perusahaan fiktif.</b><p class="muted" style="font-size:13.5px">Ikuti tur 3 menit: dari karyawan mengajukan kebutuhan sampai vendor dibayar. Semua yang Anda isi hanya tersimpan di perangkat Anda.</p></div><button class="btn primary big" data-act="tourStart">&#9654; Mulai tur panduan</button></div>
+ <div class="grid kpis">
+  <div class="panel kpi"><div class="l">PR aktif</div><div class="v">${needs.length}</div><div class="l">${cnt('approval')} menunggu approval</div></div>
+  <div class="panel kpi"><div class="l">Nilai PO terkunci</div><div class="v">${rpS(spend)}</div><div class="l">${decided.length} pengadaan, belum PPN</div></div>
+  <div class="panel kpi"><div class="l">Penghematan vs estimasi PR</div><div class="v" style="color:var(--ok)">${rpS(save)}</div><div class="l">${est?((save/est*100).toLocaleString('id-ID',{maximumFractionDigits:1})):0}% dari ${rpS(est)}</div></div>
+  <div class="panel kpi"><div class="l">Rata-rata PR → PO</div><div class="v">6 hari</div><div class="l">SLA internal 14 hari</div></div>
+ </div>
+ <div class="grid two" style="margin-top:12px">
+  <div class="panel stack"><div class="row between"><h2>Butuh tindakan</h2><button class="btn small" data-act="nav" data-v="list">Semua pengadaan</button></div>
+   <div class="tbl-wrap" style="border:0"><table><thead><tr><th>No. PR</th><th>Pengadaan</th><th>Status</th><th class="r">Estimasi</th></tr></thead><tbody>
+   ${needs.map(r=>`<tr class="click" data-act="open" data-id="${r.id}"><td class="mono">${r.prNo}</td><td>${esc(r.title)}<div class="muted" style="font-size:12px">${esc(r.dept)} · ${esc(r.requester)}</div></td><td>${pill(r)}</td><td class="r">${rpS(estTotal(r))}</td></tr>`).join('')}
+   </tbody></table></div></div>
+  <div class="panel stack"><h2>Posisi di alur Source-to-Pay</h2>
+   ${flowCounts.map(([k,l])=>`<div><div class="row between" style="font-size:13px"><span>${l}</span><b class="num">${cnt(k)}</b></div><div class="bar"><i style="width:${cnt(k)/max*100}%"></i></div></div>`).join('')}
+   <p class="muted" style="font-size:12.5px">${cnt('rejected')} PR ditolak bulan ini. Klik baris di kiri untuk melanjutkan prosesnya.</p>
+  </div>
+ </div>
+ ${ctaBlock()}`;
+}
+
+/* ---------- LIST ---------- */
+function vList(){
+ const F=[['all','Semua'],['approval','Approval'],['sourcing','RFQ & QCF'],['po','PO'],['gr','Penerimaan'],['inv','Invoice'],['done','Selesai'],['rejected','Ditolak']];
+ const rs=S.reqs.filter(r=>UI.filter==='all'||stage(r)===UI.filter).slice().sort((a,b)=>b.prNo.localeCompare(a.prNo));
+ return `<div class="pagehead"><div><div class="eyebrow">Purchase Request → Payment</div><h1>Daftar pengadaan</h1></div><button class="btn primary" data-act="nav" data-v="new">+ Purchase Request</button></div>
+ <div class="subtabs" style="margin-bottom:12px">${F.map(([k,l])=>`<button class="subtab" data-act="filter" data-f="${k}" aria-pressed="${UI.filter===k}">${l}</button>`).join('')}</div>
+ <div class="tbl-wrap"><table><thead><tr><th>No. PR</th><th>Tanggal</th><th>Pengadaan</th><th>Departemen</th><th class="r">Estimasi</th><th>Status</th></tr></thead><tbody>
+ ${rs.map(r=>`<tr class="click" data-act="open" data-id="${r.id}"><td class="mono">${r.prNo}</td><td>${fd(r.date)}</td><td>${esc(r.title)}</td><td>${esc(r.dept)}</td><td class="r">${rp(estTotal(r))}</td><td>${pill(r)}</td></tr>`).join('')||'<tr><td colspan="6" class="muted">Tidak ada pengadaan di status ini.</td></tr>'}
+ </tbody></table></div>`;
+}
+
+/* ---------- NEW PR ---------- */
+function newDraft(){return {requester:'',dept:'General Affairs',cc:'CC-120',needBy:'',cat:CATS[0],title:'',just:'',items:[{name:'',qty:1,uom:'unit',est:0}]}}
+function vNew(){
+ const d=UI.draft||(UI.draft=newDraft());const t=d.items.reduce((a,i)=>a+(+i.qty||0)*(+i.est||0),0);
+ return `<div class="pagehead"><div><div class="eyebrow">Form PR · nomor otomatis</div><h1>Purchase Request baru</h1></div></div>
+ <form id="prForm" class="stack" novalidate>
+ <div class="panel stack"><h2>Data pemohon</h2><div class="formgrid">
+  <label class="f">Nama pemohon<input class="i" id="d_requester" data-d="requester" value="${esc(d.requester)}" placeholder="mis. Nadia Putri" required></label>
+  <label class="f">Departemen<select class="i" id="d_dept" data-d="dept">${['Finance','IT','General Affairs','Customer Service','Marketing','Operasional','HR'].map(x=>`<option ${d.dept===x?'selected':''}>${x}</option>`).join('')}</select></label>
+  <label class="f">Cost center<input class="i" id="d_cc" data-d="cc" value="${esc(d.cc)}"></label>
+  <label class="f">Dibutuhkan tanggal<input class="i" type="date" id="d_needBy" data-d="needBy" value="${esc(d.needBy)}"></label>
+ </div></div>
+ <div class="panel stack"><h2>Kebutuhan</h2><div class="formgrid">
+  <label class="f">Judul pengadaan<input class="i" id="d_title" data-d="title" value="${esc(d.title)}" placeholder="mis. Printer untuk lantai 2"></label>
+  <label class="f">Kategori<select class="i" id="d_cat" data-d="cat">${CATS.map(x=>`<option ${d.cat===x?'selected':''}>${x}</option>`).join('')}</select></label>
+ </div>
+ <label class="f">Alasan / justifikasi kebutuhan<textarea class="i" id="d_just" data-d="just" rows="2" placeholder="Kenapa dibutuhkan, dampaknya jika tidak dibeli">${esc(d.just)}</textarea></label>
+ <div class="tbl-wrap"><table><thead><tr><th>#</th><th>Nama barang/jasa & spesifikasi</th><th class="r">Qty</th><th>Satuan</th><th class="r">Estimasi harga/satuan</th><th class="r">Subtotal</th><th></th></tr></thead><tbody>
+ ${d.items.map((it,k)=>`<tr><td>${k+1}</td><td><input class="i" style="min-width:220px" id="it_name_${k}" data-it="${k}|name" value="${esc(it.name)}" placeholder="Nama & spesifikasi"></td>
+  <td class="r"><input class="cell s" id="it_qty_${k}" type="number" min="1" data-it="${k}|qty" value="${esc(it.qty)}"></td>
+  <td><input class="i" style="width:80px" id="it_uom_${k}" data-it="${k}|uom" value="${esc(it.uom)}"></td>
+  <td class="r"><input class="cell" id="it_est_${k}" type="number" min="0" step="1000" data-it="${k}|est" value="${esc(it.est)}"></td>
+  <td class="r">${rp((+it.qty||0)*(+it.est||0))}</td>
+  <td>${d.items.length>1?`<button type="button" class="btn small" data-act="delItem" data-k="${k}" aria-label="Hapus baris ${k+1}">Hapus</button>`:''}</td></tr>`).join('')}
+ <tr><td colspan="5" class="r"><b>Total estimasi</b></td><td class="r"><b>${rp(t)}</b></td><td></td></tr>
+ </tbody></table></div>
+ <div><button type="button" class="btn small" data-act="addItem">+ Tambah baris</button></div>
+ </div>
+ <div class="panel stack"><h2>Aturan yang berlaku otomatis</h2>
+  <div class="note">${rule(t)}</div>
+  <div class="flow">${chainFor(t).map((k,i)=>`${i?'<span class="arrow">→</span>':''}<span class="step">${APPROVERS[k].role}</span>`).join('')}</div>
+ </div>
+ <div id="formErr"></div>
+ <div class="row"><button class="btn primary" type="submit">Kirim untuk approval</button><button class="btn" type="button" data-act="fillSample">Isi contoh</button></div>
+ </form>`;
+}
+
+/* ---------- DETAIL ---------- */
+function flowBar(r){
+ const st=stage(r);const order=['approval','sourcing','po','gr','inv','done'];const labels={approval:'Approval PR',sourcing:'RFQ & QCF',po:'Purchase Order',gr:'Penerimaan',inv:'Invoice & bayar',done:'Selesai'};
+ const idx=order.indexOf(st);
+ return `<div class="flow">${order.map((k,i)=>{let c='step';if(st==='rejected'){c+=i===0?' stop':''}else if(i<idx||st==='done')c+=' done';else if(i===idx)c+=' now';return `${i?'<span class="arrow">→</span>':''}<span class="${c}">${labels[k]}</span>`}).join('')}</div>`;
+}
+function vDetail(){
+ const r=R(UI.rid);if(!r){UI.view='list';return vList()}
+ const st=stage(r);
+ const subs=[['pr','PR & approval'],['qcf','RFQ & QCF'],['po','PO'],['gr','Penerimaan & invoice']];
+ if(!UI.sub)UI.sub={approval:'pr',rejected:'pr',sourcing:'qcf',po:'po',gr:'gr',inv:'gr',done:'gr'}[st];
+ let body='';
+ if(UI.sub==='pr')body=subPR(r);else if(UI.sub==='qcf')body=subQCF(r);else if(UI.sub==='po')body=subPO(r);else body=subGR(r);
+ return `<div class="row" style="margin-bottom:10px"><button class="btn small" data-act="nav" data-v="list">← Daftar</button></div>
+ <div class="pagehead"><div><div class="eyebrow mono">${r.prNo}</div><h1>${esc(r.title)}</h1><p class="muted">${esc(r.dept)} · ${esc(r.requester)} · dibutuhkan ${fd(r.needBy)}</p></div>${pill(r)}</div>
+ <div class="panel" style="margin-bottom:12px;overflow-x:auto">${flowBar(r)}</div>
+ <div class="subtabs" style="margin-bottom:12px">${subs.map(([k,l])=>`<button class="subtab" data-act="sub" data-s="${k}" aria-pressed="${UI.sub===k}">${l}</button>`).join('')}</div>
+ ${body}`;
+}
+function itemsTable(r){return `<div class="tbl-wrap"><table><thead><tr><th>#</th><th>Barang/jasa</th><th class="r">Qty</th><th>Satuan</th><th class="r">Estimasi/satuan</th><th class="r">Subtotal</th></tr></thead><tbody>
+ ${r.items.map((i,k)=>`<tr><td>${k+1}</td><td>${esc(i.name)}</td><td class="r">${i.qty}</td><td>${esc(i.uom)}</td><td class="r">${rp(i.est)}</td><td class="r">${rp(i.qty*i.est)}</td></tr>`).join('')}
+ <tr><td colspan="5" class="r"><b>Total estimasi</b></td><td class="r"><b>${rp(estTotal(r))}</b></td></tr></tbody></table></div>`}
+function subPR(r){
+ const next=r.approvals.findIndex(a=>a.status==='pending');const rejected=r.approvals.some(a=>a.status==='no');
+ return `<div class="grid two">
+ <div class="panel stack"><div class="row between"><h2>Purchase Request</h2><button class="btn small" data-act="doc" data-d="pr">Lihat dokumen PR</button></div>
+  <p><span class="muted">Justifikasi:</span> ${esc(r.just)}</p>
+  <p class="muted" style="font-size:12.5px">Kategori ${esc(r.cat)} · Cost center ${esc(r.cc)} · Diajukan ${fd(r.date)}</p>
+  ${itemsTable(r)}
+  <div class="note">${rule(estTotal(r))}</div>
+ </div>
+ <div class="panel stack"><h2>Rantai approval</h2><div class="chain">
+  ${r.approvals.map((a,i)=>{const p=APPROVERS[a.key];const s=a.status==='ok'?`<span class="pill p-done">Disetujui ${fd(a.date)}</span>`:a.status==='no'?`<span class="pill p-rejected">Ditolak ${fd(a.date)}</span>`:`<span class="pill p-approval">Menunggu</span>`;
+   return `<div class="a"><div><b>${p.role}</b><div class="muted" style="font-size:12.5px">${p.name}</div>${a.note?`<div style="font-size:12.5px;margin-top:4px">“${esc(a.note)}”</div>`:''}</div><div>${s}</div></div>`}).join('')}
+ </div>
+ ${!rejected&&next>=0?`<div class="stack" style="gap:8px"><p class="muted" style="font-size:12.5px">Simulasi: Anda login sebagai <b>${APPROVERS[r.approvals[next].key].name}</b> (${APPROVERS[r.approvals[next].key].role}).</p>
+  <label class="f">Catatan (wajib jika menolak)<input class="i" id="apNote" placeholder="opsional"></label>
+  <div class="row"><button class="btn primary" data-act="approve">Setujui</button><button class="btn danger" data-act="reject">Tolak</button></div></div>`:''}
+ ${rejected?`<div class="note bad">PR ditolak. Pemohon perlu merevisi dan mengajukan PR baru.</div>`:''}
+ ${!rejected&&next<0?`<div class="note">Approval lengkap. Lanjut ke RFQ & QCF.</div><div><button class="btn primary" data-act="sub" data-s="qcf">Lanjut ke RFQ & QCF →</button></div>`:''}
+ </div></div>`;
+}
+function subQCF(r){
+ const st=stage(r);
+ if(st==='approval'||st==='rejected')return `<div class="panel"><div class="note warn">RFQ baru bisa dikirim setelah PR disetujui lengkap.</div></div>`;
+ const locked=r.qcf&&r.qcf.decided;const total=estTotal(r);const need=minQuotes(total);
+ const cand=S.vendors.filter(v=>v.cat===r.cat);
+ const rows=qcfRows(r);const rec=rows.find(x=>x.rec);
+ const winner=locked?r.qcf.winner:(UI.pick&&UI.pick[r.id])||(rec&&rec.vid);
+ const w=rows.find(x=>x.vid===winner);
+ const lowest=rows.length?Math.min(...rows.map(x=>x.total)):0;const highest=rows.length?Math.max(...rows.map(x=>x.total)):0;
+ const qInputs=r.invited.map(vid=>{const q=r.quotes[vid]||{p:[]};return `<div class="panel stack" style="padding:12px"><div class="row between"><b>${esc(V(vid).name)}</b>${qTotal(r,vid)?`<span class="num">${rp(qTotal(r,vid))}</span>`:'<span class="muted" style="font-size:12.5px">belum lengkap</span>'}</div>
+  <div class="tbl-wrap"><table><thead><tr><th>Item</th><th class="r">Qty</th><th class="r">Harga/satuan</th></tr></thead><tbody>
+  ${r.items.map((it,k)=>`<tr><td>${esc(it.name)}</td><td class="r">${it.qty} ${esc(it.uom)}</td><td class="r"><input class="cell" type="number" min="0" step="500" id="q_${vid}_${k}" data-q="${vid}|p|${k}" value="${q.p&&q.p[k]!=null?q.p[k]:''}" ${locked?'disabled':''}></td></tr>`).join('')}
+  </tbody></table></div>
+  <div class="formgrid" style="grid-template-columns:repeat(auto-fit,minmax(120px,1fr))">
+   <label class="f">Termin bayar<select class="i" id="q_${vid}_pay" data-q="${vid}|pay" ${locked?'disabled':''}>${['COD','NET 14','NET 30','NET 45','DP 50%'].map(x=>`<option ${q.pay===x?'selected':''}>${x}</option>`).join('')}</select></label>
+   <label class="f">Waktu kirim (hari)<input class="i" type="number" min="1" id="q_${vid}_lead" data-q="${vid}|lead" value="${q.lead||''}" ${locked?'disabled':''}></label>
+   <label class="f">Garansi/SLA<input class="i" id="q_${vid}_war" data-q="${vid}|war" value="${esc(q.war||'')}" ${locked?'disabled':''}></label>
+   <label class="f">Nilai teknis (1–5)<select class="i" id="q_${vid}_tech" data-q="${vid}|tech" ${locked?'disabled':''}>${[1,2,3,4,5].map(x=>`<option ${+q.tech===x?'selected':''}>${x}</option>`).join('')}</select></label>
+  </div></div>`}).join('');
+ return `<div class="stack">
+ <div class="panel stack"><div class="row between"><h2>1. Undang vendor (RFQ)</h2><span class="muted" style="font-size:12.5px">Minimal ${need} penawaran · kategori ${esc(r.cat)}</span></div>
+  <div class="row">${cand.map(v=>{const bl=v.status!=='Aktif';const on=r.invited.includes(v.id);return `<label class="btn small" style="${bl?'opacity:.5':''}"><input type="checkbox" id="inv_${v.id}" data-inv="${v.id}" ${on?'checked':''} ${bl||locked?'disabled':''}> ${esc(v.name)} ${bl?'(daftar hitam)':''}</label>`}).join('')}</div>
+  ${r.invited.length<need?`<div class="note warn">Baru ${r.invited.length} vendor diundang. Kebijakan mewajibkan minimal ${need}.</div>`:''}
+  <div class="row">${!locked?`<button class="btn small primary" data-act="sampleQuotes">Isi penawaran contoh (3 vendor)</button>`:''}${r.invited.length?`<button class="btn small" data-act="doc" data-d="rfq">Lihat surat RFQ</button>`:''}</div>
+ </div>
+ ${r.invited.length?`<div class="stack"><h2>2. Input penawaran vendor</h2><div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))">${qInputs}</div></div>`:''}
+ ${rows.length?`<div class="panel stack"><div class="row between"><h2>3. Quotation Comparison Form (QCF)</h2><button class="btn small" data-act="doc" data-d="qcf">Lihat dokumen QCF</button></div>
+  <p class="muted" style="font-size:12.5px">Bobot penilaian: harga ${WEIGHTS.price}%, teknis ${WEIGHTS.tech}%, waktu kirim ${WEIGHTS.lead}%. Skor harga = penawaran terendah ÷ penawaran vendor.</p>
+  <div class="tbl-wrap"><table><thead><tr><th>Vendor</th><th class="r">Total (excl. PPN)</th><th>Termin</th><th class="r">Kirim</th><th>Garansi</th><th class="r">Skor harga</th><th class="r">Teknis</th><th class="r">Skor kirim</th><th class="r">Skor akhir</th></tr></thead><tbody>
+  ${rows.slice().sort((a,b)=>b.score-a.score).map(x=>`<tr class="${x.vid===winner?'win':''}"><td><b>${esc(V(x.vid).name)}</b><div class="row" style="gap:4px;margin-top:2px">${x.rec?'<span class="pill p-done">Rekomendasi</span>':''}${x.low?'<span class="pill p-sourcing">Termurah</span>':''}</div></td><td class="r">${rp(x.total)}</td><td>${esc(x.q.pay||'')}</td><td class="r">${x.q.lead||'—'} hr</td><td>${esc(x.q.war||'')}</td><td class="r">${x.sp.toFixed(1)}</td><td class="r">${x.st.toFixed(0)}</td><td class="r">${x.sl.toFixed(0)}</td><td class="r"><b>${x.score.toFixed(1)}</b></td></tr>`).join('')}
+  </tbody></table></div>
+  ${w?`<div class="grid kpis"><div class="panel kpi"><div class="l">Pemenang</div><div style="font-weight:700">${esc(V(w.vid).name)}</div></div><div class="panel kpi"><div class="l">Hemat vs estimasi PR</div><div class="v" style="color:${total-w.total>=0?'var(--ok)':'var(--bad)'}">${rpS(total-w.total)}</div></div><div class="panel kpi"><div class="l">Hemat vs penawaran tertinggi</div><div class="v">${rpS(highest-w.total)}</div></div></div>`:''}
+  ${locked?`<div class="note">QCF dikunci ${fd(r.qcf.date)}. Alasan: ${esc(r.qcf.note)}</div>${!r.po?`<div><button class="btn primary" data-act="sub" data-s="po">Lanjut terbitkan PO →</button></div>`:''}`:`
+  <div class="formgrid"><label class="f">Vendor terpilih<select class="i" id="pickWinner" data-act-change="pick">${rows.map(x=>`<option value="${x.vid}" ${x.vid===winner?'selected':''}>${esc(V(x.vid).name)}${x.rec?' (rekomendasi)':''}</option>`).join('')}</select></label></div>
+  ${w&&!w.low?`<div class="note warn">Vendor terpilih bukan yang termurah (selisih ${rp(w.total-lowest)}). Justifikasi wajib diisi.</div>`:''}
+  <label class="f">Justifikasi pemilihan<textarea class="i" id="qcfNote" rows="2" placeholder="mis. skor tertinggi, garansi lebih panjang, hasil negosiasi"></textarea></label>
+  ${rows.length<need?`<div class="note warn">Baru ${rows.length} penawaran lengkap; butuh minimal ${need} untuk mengunci QCF.</div>`:''}
+  <div id="qcfErr"></div>
+  <div><button class="btn primary" data-act="lockQcf" ${rows.length<need?'disabled':''}>Kunci QCF & pilih pemenang</button></div>`}
+ </div>`:''}
+ </div>`;
+}
+function subPO(r){
+ if(!r.qcf||!r.qcf.decided)return `<div class="panel"><div class="note warn">PO terbit otomatis dari pemenang QCF. Selesaikan RFQ & QCF dulu.</div></div>`;
+ const t=poTotal(r);const q=r.quotes[r.qcf.winner];
+ return `<div class="panel stack"><div class="row between"><h2>Purchase Order</h2>${r.po?`<span class="mono">${r.po.no}</span>`:''}</div>
+ <div class="tbl-wrap"><table><thead><tr><th>Item</th><th class="r">Qty</th><th class="r">Harga/satuan</th><th class="r">Jumlah</th></tr></thead><tbody>
+ ${r.items.map((i,k)=>`<tr><td>${esc(i.name)}</td><td class="r">${i.qty} ${esc(i.uom)}</td><td class="r">${rp(q.p[k])}</td><td class="r">${rp(q.p[k]*i.qty)}</td></tr>`).join('')}
+ <tr><td colspan="3" class="r">Subtotal</td><td class="r">${rp(t.sub)}</td></tr><tr><td colspan="3" class="r">PPN 11%</td><td class="r">${rp(t.ppn)}</td></tr><tr><td colspan="3" class="r"><b>Total PO</b></td><td class="r"><b>${rp(t.tot)}</b></td></tr></tbody></table></div>
+ <p><span class="muted">Vendor:</span> <b>${esc(V(r.qcf.winner).name)}</b> · termin ${esc(q.pay)} · kirim ${q.lead} hari · ${esc(q.war)}</p>
+ ${r.po?`<div class="row"><button class="btn primary" data-act="doc" data-d="po">Lihat dokumen PO</button>${!r.gr?`<button class="btn" data-act="sub" data-s="gr">Catat penerimaan →</button>`:''}</div>`:
+ `<label class="f">Alamat pengiriman<input class="i" id="poAddr" value="Kantor Pusat — ${esc(r.dept)}"></label><div><button class="btn primary" data-act="issuePo">Terbitkan PO</button></div>`}
+ </div>`;
+}
+function subGR(r){
+ if(!r.po)return `<div class="panel"><div class="note warn">Penerimaan barang/jasa dicatat setelah PO terbit.</div></div>`;
+ const q=r.quotes[r.qcf.winner];const t=poTotal(r);
+ let grPart;
+ if(!r.gr){grPart=`<div class="panel stack"><h2>Goods Receipt / BAST</h2><p class="muted" style="font-size:12.5px">Isi jumlah yang benar-benar diterima. Selisih akan terdeteksi di 3-way match.</p>
+  <div class="tbl-wrap"><table><thead><tr><th>Item</th><th class="r">Qty PO</th><th class="r">Qty diterima</th></tr></thead><tbody>
+  ${r.items.map((i,k)=>`<tr><td>${esc(i.name)}</td><td class="r">${i.qty} ${esc(i.uom)}</td><td class="r"><input class="cell s" type="number" min="0" id="gr_${k}" value="${i.qty}"></td></tr>`).join('')}</tbody></table></div>
+  <label class="f">Catatan kondisi<input class="i" id="grNote" value="Diterima baik dan sesuai spesifikasi."></label>
+  <div><button class="btn primary" data-act="saveGr">Simpan penerimaan</button></div></div>`}
+ else grPart=`<div class="panel stack"><div class="row between"><h2>Goods Receipt / BAST</h2><button class="btn small" data-act="doc" data-d="gr">Lihat BAST</button></div><p><span class="mono">${r.gr.no}</span> · ${fd(r.gr.date)} · ${esc(r.gr.note)}</p></div>`;
+ let invPart='';
+ if(r.gr){
+  const grv=Math.round(grValue(r)*(1+PPN));
+  if(!r.inv)invPart=`<div class="panel stack"><h2>Invoice vendor</h2><div class="formgrid">
+   <label class="f">No. invoice<input class="i" id="invNo" value="INV/${V(r.qcf.winner).name.split(' ').slice(1,2).join('').slice(0,3).toUpperCase()}/${Math.floor(100+Math.random()*800)}"></label>
+   <label class="f">Nilai invoice (incl. PPN)<input class="i" type="number" id="invAmt" value="${grv}"></label></div>
+   <p class="muted" style="font-size:12.5px">Coba ubah nilainya untuk melihat 3-way match menolak invoice yang tidak cocok.</p>
+   <div><button class="btn primary" data-act="saveInv">Catat invoice & cek 3-way match</button></div></div>`;
+  else{
+   const ok=Math.abs(r.inv.amount-grv)<=1;
+   invPart=`<div class="panel stack"><div class="row between"><h2>3-way match</h2><button class="btn small" data-act="doc" data-d="match">Lihat lembar verifikasi</button></div>
+    <div class="tbl-wrap"><table><thead><tr><th>Dokumen</th><th>Nomor</th><th class="r">Nilai (incl. PPN)</th></tr></thead><tbody>
+    <tr><td>Purchase Order</td><td class="mono">${r.po.no}</td><td class="r">${rp(t.tot)}</td></tr>
+    <tr><td>Goods Receipt</td><td class="mono">${r.gr.no}</td><td class="r">${rp(grv)}</td></tr>
+    <tr><td>Invoice</td><td class="mono">${esc(r.inv.no)}</td><td class="r">${rp(r.inv.amount)}</td></tr></tbody></table></div>
+    ${ok?`<div class="note">Cocok. Invoice sesuai barang/jasa yang diterima. ${r.paid?`Dibayar ${fd(r.paid.date)} sesuai termin ${esc(q.pay)}.`:`Siap dibayar sesuai termin ${esc(q.pay)}.`}</div>${!r.paid?`<div><button class="btn primary" data-act="pay">Tandai sudah dibayar</button></div>`:''}`
+    :`<div class="note bad">Tidak cocok: selisih ${rp(r.inv.amount-grv)}. Invoice ditahan dan dikembalikan ke vendor untuk koreksi.</div><div><button class="btn" data-act="clearInv">Input ulang invoice</button></div>`}
+   </div>`}
+ }
+ return `<div class="stack">${grPart}${invPart}</div>`;
+}
+
+/* ---------- VENDORS ---------- */
+function vVendors(){
+ return `<div class="pagehead"><div><div class="eyebrow">Vendor master</div><h1>Daftar vendor</h1></div><button class="btn" data-act="doc" data-d="t_vreg">Form pendaftaran vendor</button></div>
+ <div class="tbl-wrap"><table><thead><tr><th>Kode</th><th>Vendor</th><th>Kategori</th><th>PIC</th><th>Telepon</th><th class="r">Rating</th><th>Status</th><th class="r">PO dimenangkan</th></tr></thead><tbody>
+ ${S.vendors.map(v=>{const won=S.reqs.filter(r=>r.po&&r.qcf.winner===v.id).length;return `<tr><td class="mono">${v.id}</td><td><b>${esc(v.name)}</b></td><td>${esc(v.cat)}</td><td>${esc(v.pic)}</td><td class="mono">${esc(v.phone)}</td><td class="r">${v.rating.toFixed(1)}</td><td>${v.status==='Aktif'?'<span class="pill p-done">Aktif</span>':'<span class="pill p-rejected">Daftar hitam</span>'}</td><td class="r">${won}</td></tr>`}).join('')}
+ </tbody></table></div>
+ <p class="muted" style="margin-top:10px;font-size:12.5px">Vendor berstatus daftar hitam otomatis tidak bisa diundang ke RFQ. Rating diperbarui dari evaluasi kinerja tiap kuartal.</p>`;
+}
+
+/* ---------- DOCS & SOP ---------- */
+const TEMPLATES=[
+ ['PR','Purchase Request','Permintaan pembelian dari user, dengan justifikasi dan estimasi biaya.','pr'],
+ ['RFQ','Request for Quotation','Surat permintaan penawaran harga ke vendor.','rfq'],
+ ['QCF','Quotation Comparison Form','Perbandingan penawaran dengan skor harga, teknis, dan waktu kirim.','qcf'],
+ ['BAN','Berita Acara Negosiasi','Catatan hasil negosiasi harga dan termin untuk pengadaan > Rp100 jt.','t_ban'],
+ ['PO','Purchase Order','Pesanan resmi ke vendor pemenang, termasuk PPN dan termin.','po'],
+ ['SPK','Surat Perintah Kerja','Pengganti PO untuk pekerjaan jasa/proyek.','t_spk'],
+ ['BAST','Goods Receipt / BAST','Bukti serah terima barang atau jasa.','gr'],
+ ['3WM','Lembar 3-Way Match','Verifikasi PO, penerimaan, dan invoice sebelum dibayar.','match'],
+ ['VRF','Form Pendaftaran Vendor','Data legal, pajak, rekening, dan PIC calon vendor.','t_vreg'],
+ ['VEF','Evaluasi Kinerja Vendor','Penilaian kuartalan: kualitas, ketepatan waktu, harga, layanan.','t_veval'],
+ ['NDA','Pakta Integritas Vendor','Komitmen anti-suap dan kerahasiaan yang ditandatangani vendor.','t_pakta']
+];
+function vDocs(){
+ return `<div class="pagehead"><div><div class="eyebrow">Toolkit procurement</div><h1>Dokumen & SOP</h1></div></div>
+ <div class="panel stack" style="margin-bottom:12px"><h2>Alur Source-to-Pay</h2>
+  <div class="flow">${['Purchase Request','Approval berjenjang','RFQ ke vendor','QCF & negosiasi','Purchase Order / SPK','Penerimaan / BAST','Invoice & 3-way match','Pembayaran'].map((s,i)=>`${i?'<span class="arrow">→</span>':''}<span class="step">${s}</span>`).join('')}</div></div>
+ <div class="panel stack" style="margin-bottom:12px"><h2>Matriks approval & jumlah penawaran</h2>
+  <div class="tbl-wrap"><table><thead><tr><th>Nilai pengadaan</th><th>Min. penawaran</th><th>Dokumen wajib</th><th>Approver</th></tr></thead><tbody>
+  <tr><td>≤ Rp10 juta</td><td>1</td><td>PR, PO, BAST</td><td>Atasan Langsung</td></tr>
+  <tr><td>Rp10–100 juta</td><td>3</td><td>PR, RFQ, QCF, PO, BAST</td><td>Atasan Langsung, Finance Controller</td></tr>
+  <tr><td>&gt; Rp100 juta</td><td>3</td><td>PR, RFQ, QCF, BA Negosiasi, PO/SPK, BAST</td><td>Atasan Langsung, Finance Controller, Direktur</td></tr>
+  </tbody></table></div><p class="muted" style="font-size:12.5px">Batas nilai dan bobot penilaian bisa disesuaikan dengan kebijakan masing-masing perusahaan.</p></div>
+ <div class="doclist">${TEMPLATES.map(([c,t,d,k])=>`<div class="panel doccard"><div class="stack" style="gap:4px"><span class="code">${c}</span><h3>${t}</h3><p class="muted" style="font-size:12.5px">${d}</p></div><div><button class="btn small" data-act="doc" data-d="${k}">Lihat contoh</button></div></div>`).join('')}</div>
+ ${ctaBlock()}`;
+}
+function ctaBlock(){return `<section class="cta"><div style="min-width:0;max-width:560px"><div class="eyebrow" style="color:inherit;opacity:.7">Dibangun oleh</div><h2 style="color:inherit">Syamsul Siam, S.H. · Procurement & Commercial Consultant</h2><p class="muted" style="margin-top:4px">13+ tahun memimpin procurement di fintech, SaaS, rumah sakit, dan properti. Saya bantu perusahaan menyiapkan SOP, dokumen, dan sistem pengadaan seperti demo ini.</p></div>
+ <div class="contact"><a class="btn small" href="index.html#kontak">Jadwalkan konsultasi</a><button class="btn small" data-act="copy" data-t="syamsulsiam@gmail.com">syamsulsiam@gmail.com</button><button class="btn small" data-act="copy" data-t="+62 878-8762-5841">+62 878-8762-5841</button></div></section>`}
+
+/* ---------- PAPER DOCUMENTS ---------- */
+function kop(){return `<div class="kop"><div><b>${COMPANY.name}</b><div>${COMPANY.addr}</div><div>NPWP ${COMPANY.npwp}</div></div><div style="text-align:right;color:#555">Dokumen sistem<br>Siam e-Procurement</div></div>`}
+function sign(list){return `<div class="sign">${list.map(([role,name,st,date])=>`<div><div>${role}</div><div class="box">${st==='ok'?`<span class="stamp">DISETUJUI<br>${fd(date)}</span>`:st==='no'?`<span class="stamp no">DITOLAK<br>${fd(date)}</span>`:''}</div><div style="border-top:1px solid #333;padding-top:2px"><b>${esc(name)}</b></div></div>`).join('')}</div>`}
+function meta(pairs){return `<div class="meta">${pairs.map(([a,b])=>`<div><span>${a}</span><span>: ${b}</span></div>`).join('')}</div>`}
+function sampleFor(kind){
+ const cur=UI.view==='detail'&&R(UI.rid);
+ const okFor={pr:r=>true,rfq:r=>r.invited.length,qcf:r=>qcfRows(r).length,po:r=>r.po,gr:r=>r.gr,match:r=>r.inv};
+ if(cur&&okFor[kind](cur))return cur;
+ return S.reqs.find(r=>okFor[kind](r))||R('R1');
+}
+function docHTML(kind){
+ if(kind.startsWith('t_'))return blankDoc(kind);
+ const r=sampleFor(kind);
+ if(kind==='pr'){
+  return kop()+`<h4>Purchase Request</h4><div class="docno">${r.prNo}</div>`+meta([['Tanggal',fd(r.date)],['Pemohon',esc(r.requester)],['Departemen',esc(r.dept)],['Cost center',esc(r.cc)],['Kategori',esc(r.cat)],['Dibutuhkan',fd(r.needBy)]])+
+  `<div class="tblw"><table><thead><tr><th>No</th><th>Barang/jasa & spesifikasi</th><th>Qty</th><th>Satuan</th><th>Estimasi/satuan</th><th>Jumlah</th></tr></thead><tbody>${r.items.map((i,k)=>`<tr><td>${k+1}</td><td>${esc(i.name)}</td><td class="r">${i.qty}</td><td>${esc(i.uom)}</td><td class="r">${rp(i.est)}</td><td class="r">${rp(i.qty*i.est)}</td></tr>`).join('')}<tr><td colspan="5" class="r"><b>Total estimasi</b></td><td class="r"><b>${rp(estTotal(r))}</b></td></tr></tbody></table></div>`+
+  `<div class="sec">Justifikasi</div><p style="margin-top:4px">${esc(r.just)}</p><div class="sec">Ketentuan</div><p style="margin-top:4px">${rule(estTotal(r))}</p>`+
+  sign([['Diajukan oleh',r.requester,'ok',r.date],...r.approvals.map(a=>[APPROVERS[a.key].role,APPROVERS[a.key].name,a.status,a.date])]);
+ }
+ if(kind==='rfq'){
+  const v=V(r.invited[0]);
+  return kop()+`<h4>Request for Quotation</h4><div class="docno">RFQ/${r.prNo.slice(3)}</div>`+meta([['Kepada',esc(v.name)+(r.invited.length>1?` (+${r.invited.length-1} vendor lain)`:'')],['Up.',esc(v.pic)],['Referensi',r.prNo],['Batas penawaran','5 hari kerja sejak surat diterima']])+
+  `<p>Dengan hormat, kami mengundang Bapak/Ibu untuk mengajukan penawaran harga atas kebutuhan berikut:</p><div class="tblw" style="margin-top:8px"><table><thead><tr><th>No</th><th>Barang/jasa & spesifikasi</th><th>Qty</th><th>Satuan</th></tr></thead><tbody>${r.items.map((i,k)=>`<tr><td>${k+1}</td><td>${esc(i.name)}</td><td class="r">${i.qty}</td><td>${esc(i.uom)}</td></tr>`).join('')}</tbody></table></div>`+
+  `<div class="sec">Penawaran wajib mencantumkan</div><ol style="margin:4px 0 0;padding-left:18px"><li>Harga satuan dan total, terpisah dari PPN</li><li>Termin pembayaran dan masa berlaku penawaran</li><li>Waktu pengiriman/pelaksanaan</li><li>Garansi atau SLA layanan</li><li>Salinan NIB dan NPWP perusahaan</li></ol><p style="margin-top:8px">Penilaian: harga ${WEIGHTS.price}%, teknis ${WEIGHTS.tech}%, waktu kirim ${WEIGHTS.lead}%. Penawaran dikirim ke procurement@contohmaju.co.id.</p>`+
+  sign([['Hormat kami, Procurement','Syamsul Siam','','']]);
+ }
+ if(kind==='qcf'){
+  const rows=qcfRows(r).sort((a,b)=>b.score-a.score);const win=r.qcf.decided?r.qcf.winner:(rows.find(x=>x.rec)||{}).vid;
+  return kop()+`<h4>Quotation Comparison Form</h4><div class="docno">QCF/${r.prNo.slice(3)}</div>`+meta([['Referensi PR',r.prNo],['Pengadaan',esc(r.title)],['Estimasi PR',rp(estTotal(r))],['Bobot','Harga '+WEIGHTS.price+'% · Teknis '+WEIGHTS.tech+'% · Kirim '+WEIGHTS.lead+'%']])+
+  `<div class="tblw"><table><thead><tr><th>Item</th><th>Qty</th>${rows.map(x=>`<th>${esc(V(x.vid).name)}</th>`).join('')}</tr></thead><tbody>
+  ${r.items.map((i,k)=>`<tr><td>${esc(i.name)}</td><td class="r">${i.qty} ${esc(i.uom)}</td>${rows.map(x=>`<td class="r">${rp(x.q.p[k])}</td>`).join('')}</tr>`).join('')}
+  <tr><td colspan="2"><b>Total (excl. PPN)</b></td>${rows.map(x=>`<td class="r"><b>${rp(x.total)}</b></td>`).join('')}</tr>
+  <tr><td colspan="2">Termin bayar</td>${rows.map(x=>`<td>${esc(x.q.pay)}</td>`).join('')}</tr>
+  <tr><td colspan="2">Waktu kirim</td>${rows.map(x=>`<td>${x.q.lead} hari</td>`).join('')}</tr>
+  <tr><td colspan="2">Garansi/SLA</td>${rows.map(x=>`<td>${esc(x.q.war)}</td>`).join('')}</tr>
+  <tr><td colspan="2">Skor harga / teknis / kirim</td>${rows.map(x=>`<td class="r">${x.sp.toFixed(1)} / ${x.st.toFixed(0)} / ${x.sl.toFixed(0)}</td>`).join('')}</tr>
+  <tr><td colspan="2"><b>Skor akhir</b></td>${rows.map(x=>`<td class="r"><b>${x.score.toFixed(1)}</b>${x.vid===win?' ✓':''}</td>`).join('')}</tr></tbody></table></div>`+
+  `<div class="sec">Rekomendasi</div><p style="margin-top:4px">Pemenang: <b>${esc(V(win).name)}</b>. ${r.qcf.decided?esc(r.qcf.note):'(draf, belum dikunci)'}</p>`+
+  sign([['Disiapkan, Procurement','Syamsul Siam',r.qcf.decided?'ok':'',r.qcf.date],['Diperiksa, Finance',APPROVERS.finance.name,r.qcf.decided?'ok':'',r.qcf.date],['Disetujui, User',r.requester,r.qcf.decided?'ok':'',r.qcf.date]]);
+ }
+ if(kind==='po'){
+  const v=V(r.qcf.winner),q=r.quotes[r.qcf.winner],t=poTotal(r);
+  return kop()+`<h4>Purchase Order</h4><div class="docno">${r.po.no}</div>`+meta([['Tanggal PO',fd(r.po.date)],['Vendor',esc(v.name)],['PIC vendor',esc(v.pic)+' · '+esc(v.phone)],['Referensi',r.prNo+' · QCF/'+r.prNo.slice(3)],['Kirim ke',esc(r.po.addr)],['Termin',esc(q.pay)+' setelah BAST & invoice lengkap']])+
+  `<div class="tblw"><table><thead><tr><th>No</th><th>Barang/jasa</th><th>Qty</th><th>Satuan</th><th>Harga/satuan</th><th>Jumlah</th></tr></thead><tbody>${r.items.map((i,k)=>`<tr><td>${k+1}</td><td>${esc(i.name)}</td><td class="r">${i.qty}</td><td>${esc(i.uom)}</td><td class="r">${rp(q.p[k])}</td><td class="r">${rp(q.p[k]*i.qty)}</td></tr>`).join('')}
+  <tr><td colspan="5" class="r">Subtotal</td><td class="r">${rp(t.sub)}</td></tr><tr><td colspan="5" class="r">PPN 11%</td><td class="r">${rp(t.ppn)}</td></tr><tr><td colspan="5" class="r"><b>Total</b></td><td class="r"><b>${rp(t.tot)}</b></td></tr></tbody></table></div>`+
+  `<div class="sec">Syarat & ketentuan</div><ol style="margin:4px 0 0;padding-left:18px"><li>Pengiriman paling lambat ${q.lead} hari sejak PO diterima. Keterlambatan dikenakan denda 1‰ per hari, maks. 5% nilai PO.</li><li>Garansi/SLA: ${esc(q.war)}.</li><li>Invoice wajib mencantumkan nomor PO dan dilampiri BAST serta faktur pajak.</li><li>Vendor terikat Pakta Integritas ${COMPANY.name}.</li></ol>`+
+  sign([['Procurement','Syamsul Siam','ok',r.po.date],[APPROVERS.finance.role,APPROVERS.finance.name,'ok',r.po.date],['Diterima vendor',v.name,'','']]);
+ }
+ if(kind==='gr'){
+  const v=V(r.qcf.winner);
+  return kop()+`<h4>Berita Acara Serah Terima</h4><div class="docno">${r.gr.no}</div>`+meta([['Tanggal',fd(r.gr.date)],['Referensi PO',r.po.no],['Vendor',esc(v.name)],['Lokasi',esc(r.po.addr)]])+
+  `<p>Pada tanggal tersebut telah diserahterimakan barang/jasa berikut:</p><div class="tblw" style="margin-top:8px"><table><thead><tr><th>No</th><th>Barang/jasa</th><th>Qty PO</th><th>Qty diterima</th><th>Kondisi</th></tr></thead><tbody>${r.items.map((i,k)=>`<tr><td>${k+1}</td><td>${esc(i.name)}</td><td class="r">${i.qty} ${esc(i.uom)}</td><td class="r">${r.gr.rec[k]}</td><td>${+r.gr.rec[k]===i.qty?'Lengkap':'Kurang '+(i.qty-r.gr.rec[k])}</td></tr>`).join('')}</tbody></table></div><p style="margin-top:8px">Catatan: ${esc(r.gr.note)}</p>`+
+  sign([['Diserahkan, Vendor',v.pic+' ('+v.name+')','ok',r.gr.date],['Diterima, User',r.requester,'ok',r.gr.date],['Diketahui, Procurement','Syamsul Siam','ok',r.gr.date]]);
+ }
+ if(kind==='match'){
+  const t=poTotal(r),grv=Math.round(grValue(r)*(1+PPN)),ok=Math.abs(r.inv.amount-grv)<=1;
+  return kop()+`<h4>Lembar Verifikasi 3-Way Match</h4><div class="docno">VER/${r.po.no.slice(3)}</div>`+meta([['Vendor',esc(V(r.qcf.winner).name)],['Termin',esc(r.quotes[r.qcf.winner].pay)]])+
+  `<div class="tblw"><table><thead><tr><th>Dokumen</th><th>Nomor</th><th>Tanggal</th><th>Nilai (incl. PPN)</th></tr></thead><tbody><tr><td>Purchase Order</td><td>${r.po.no}</td><td>${fd(r.po.date)}</td><td class="r">${rp(t.tot)}</td></tr><tr><td>Goods Receipt / BAST</td><td>${r.gr.no}</td><td>${fd(r.gr.date)}</td><td class="r">${rp(grv)}</td></tr><tr><td>Invoice vendor</td><td>${esc(r.inv.no)}</td><td>${fd(r.inv.date)}</td><td class="r">${rp(r.inv.amount)}</td></tr></tbody></table></div>`+
+  `<div class="sec">Hasil</div><p style="margin-top:4px"><b>${ok?'COCOK, layak bayar.':'TIDAK COCOK, invoice ditahan.'}</b> ${r.paid?'Dibayar '+fd(r.paid.date)+'.':''}</p>`+
+  sign([['Diverifikasi, AP Finance','Rizky Amalia',ok?'ok':'no',r.inv.date],[APPROVERS.finance.role,APPROVERS.finance.name,ok?'ok':'',r.inv.date]]);
+ }
+ return '';
+}
+function blankDoc(kind){
+ const F=(l)=>`<div style="display:grid;grid-template-columns:minmax(120px,38%) 1fr;gap:8px;margin-top:6px"><span style="color:#555">${l}</span><span class="blank"></span></div>`;
+ const T={
+  t_vreg:['Formulir Pendaftaran Vendor','VRF/____/____',[['A. Data perusahaan',['Nama perusahaan','Bentuk usaha (PT/CV/perorangan)','Alamat kantor','Telepon & email','Website']],['B. Legalitas & pajak',['NIB','NPWP','Status PKP (ya/tidak)','Akta pendirian & perubahan terakhir','SK Kemenkumham']],['C. Rekening pembayaran',['Nama bank','Nama pemilik rekening (harus sama dengan nama perusahaan)']],['D. Kontak',['PIC penjualan','PIC keuangan/penagihan']],['E. Kategori & referensi',['Kategori barang/jasa','3 klien referensi']]],'Lampiran wajib: NIB, NPWP, akta, KTP direktur, surat keterangan rekening, company profile. Nomor rekening tidak ditulis di form ini; dilampirkan sebagai surat keterangan bank.'],
+  t_veval:['Evaluasi Kinerja Vendor','VEF/Q4/2026',[['Data',['Nama vendor','Periode evaluasi','Jumlah PO pada periode']],['Penilaian (skala 1–5)',['Kualitas barang/jasa (bobot 35%)','Ketepatan waktu kirim (25%)','Daya saing harga (20%)','Responsivitas & layanan purna jual (10%)','Kelengkapan dokumen & invoice (10%)','Skor akhir']],['Keputusan',['Lanjut / Pembinaan / Daftar hitam','Catatan perbaikan']]],'Skor < 3,0 dua kuartal berturut-turut: vendor masuk daftar pembinaan atau daftar hitam.'],
+  t_ban:['Berita Acara Negosiasi','BAN/____/____',[['Data',['Referensi PR & QCF','Vendor','Tanggal & tempat negosiasi','Peserta perusahaan','Peserta vendor']],['Hasil',['Harga penawaran awal','Harga setelah negosiasi','Penghematan (Rp & %)','Termin bayar disepakati','Waktu kirim/pelaksanaan','Garansi/SLA','Ketentuan lain']]],'Wajib untuk pengadaan di atas Rp100 juta. Ditandatangani kedua pihak sebelum PO/SPK terbit.'],
+  t_spk:['Surat Perintah Kerja','SPK/____/____',[['Para pihak',['Pemberi kerja','Pelaksana (vendor)','Referensi PO/QCF']],['Lingkup pekerjaan',['Uraian pekerjaan','Lokasi','Jangka waktu pelaksanaan','Nilai pekerjaan (incl. PPN)']],['Ketentuan',['Termin pembayaran','Denda keterlambatan','Masa pemeliharaan/garansi','Syarat serah terima (BAST)']]],'SPK dipakai untuk pekerjaan jasa/proyek. Untuk kontrak > 12 bulan gunakan perjanjian kerja sama yang direview legal.'],
+  t_pakta:['Pakta Integritas Vendor','PI/____/____',[['Identitas',['Nama vendor','Nama penandatangan & jabatan']],['Pernyataan',['Tidak memberi hadiah/suap kepada karyawan perusahaan','Tidak bersekongkol dengan vendor lain dalam penawaran','Menjaga kerahasiaan informasi perusahaan','Bersedia diaudit atas transaksi dengan perusahaan','Melaporkan benturan kepentingan']]],'Pelanggaran berakibat pemutusan kontrak dan masuk daftar hitam.']
+ }[kind];
+ return kop()+`<h4>${T[0]}</h4><div class="docno">${T[1]}</div>`+T[2].map(([h,fs])=>`<div class="sec">${h}</div>${fs.map(F).join('')}`).join('')+`<p class="fine">${T[3]}</p>`+sign([['Diisi oleh','','',''],['Diperiksa, Procurement','','',''],['Disetujui','','','']]);
+}
+function openDoc(kind){
+ const html=docHTML(kind);if(!html)return;
+ $('#modal').innerHTML=`<div class="overlay" data-act="closeBg" role="dialog" aria-modal="true" aria-label="Pratinjau dokumen"><div class="sheetbar"><span style="font-weight:600">Pratinjau dokumen</span><button class="btn small" data-act="closeDoc" id="closeDocBtn">Tutup</button></div><article class="paper">${html}</article></div>`;
+ document.body.style.overflow='hidden';$('#closeDocBtn').focus();
+}
+function closeDoc(){$('#modal').innerHTML='';document.body.style.overflow=''}
+
+/* ---------- RENDER ---------- */
+function render(keepScroll){
+ const y=window.scrollY;renderTabs();
+ const v=UI.view;
+ $('#app').innerHTML=v==='dash'?vDash():v==='list'?vList():v==='new'?vNew():v==='vendors'?vVendors():v==='docs'?vDocs():vDetail();
+ if(keepScroll)window.scrollTo(0,y);else window.scrollTo(0,0);
+ tourSync();
+}
+function go(v){UI.view=v;if(v!=='detail')UI.sub=null;render()}
+
+/* ---------- EVENTS ---------- */
+document.addEventListener('click',e=>{
+ const el=e.target.closest('[data-act]');if(!el)return;const a=el.dataset.act;
+ if(a==='closeBg'&&e.target!==el)return;
+ const r=UI.rid&&R(UI.rid);
+ switch(a){
+  case 'nav':go(el.dataset.v);break;
+  case 'open':UI.rid=el.dataset.id;UI.sub=null;go('detail');break;
+  case 'filter':UI.filter=el.dataset.f;render(true);break;
+  case 'sub':UI.sub=el.dataset.s;render(true);break;
+  case 'doc':openDoc(el.dataset.d);break;
+  case 'closeDoc':case 'closeBg':closeDoc();break;
+  case 'copy':{const t=el.dataset.t;try{navigator.clipboard.writeText(t).then(()=>toast('Disalin: '+t),()=>toast(t))}catch(err){toast(t)}break}
+  case 'reset':{T.on=false;document.body.classList.remove('touring');if(!UI.resetArm){UI.resetArm=true;el.textContent='Yakin? Klik lagi';el.classList.add('danger');setTimeout(()=>{UI.resetArm=false;const b=$('#resetBtn');if(b){b.textContent='Reset demo';b.classList.remove('danger')}},3000)}else{S=seed();save();UI={view:'dash',rid:null,sub:null,filter:'all',resetArm:false,draft:null};el.textContent='Reset demo';el.classList.remove('danger');render();toast('Data demo dikembalikan ke awal')}break}
+  case 'addItem':UI.draft.items.push({name:'',qty:1,uom:'unit',est:0});render(true);break;
+  case 'delItem':UI.draft.items.splice(+el.dataset.k,1);render(true);break;
+  case 'fillSample':UI.draft={requester:'Rani Oktavia',dept:'Operasional',cc:'CC-610',needBy:'2026-11-10',cat:'IT Hardware & Lisensi',title:'Printer multifungsi lantai 2',just:'Printer lama rusak; 30 staf operasional harus mencetak di lantai 3.',items:[{name:'Printer multifungsi A3 laser, duplex, network',qty:2,uom:'unit',est:12500000},{name:'Toner original cadangan',qty:4,uom:'pcs',est:1350000}]};render(true);break;
+  case 'approve':case 'reject':{
+   const note=($('#apNote')||{}).value||'';if(a==='reject'&&!note.trim()){toast('Isi alasan penolakan dulu');$('#apNote').focus();break}
+   const ap=r.approvals.find(x=>x.status==='pending');ap.status=a==='approve'?'ok':'no';ap.date=today();ap.note=note.trim();save();
+   toast(a==='approve'?'PR disetujui oleh '+APPROVERS[ap.key].name:'PR ditolak');render(true);break}
+  case 'lockQcf':{
+   const rows=qcfRows(r);const win=($('#pickWinner')||{}).value;const w=rows.find(x=>x.vid===win);const note=($('#qcfNote').value||'').trim();
+   if(w&&!w.low&&!note){$('#qcfErr').innerHTML='<div class="note bad">Isi justifikasi karena vendor terpilih bukan yang termurah.</div>';$('#qcfNote').focus();break}
+   r.qcf={decided:true,winner:win,note:note||'Penawaran terendah dan memenuhi spesifikasi.',date:today()};save();toast('QCF dikunci, pemenang: '+V(win).name);render(true);break}
+  case 'issuePo':{S.seq.po++;r.po={no:'PO/2026/10/'+String(S.seq.po).padStart(3,'0'),date:today(),addr:$('#poAddr').value};save();toast('PO '+r.po.no+' terbit');render(true);break}
+  case 'saveGr':{S.seq.gr++;r.gr={no:'GR/2026/10/'+String(S.seq.gr).padStart(3,'0'),date:today(),rec:r.items.map((_,k)=>+($('#gr_'+k).value)||0),note:$('#grNote').value};save();toast('Penerimaan dicatat');render(true);break}
+  case 'saveInv':{r.inv={no:$('#invNo').value,date:today(),amount:+$('#invAmt').value||0};save();render(true);break}
+  case 'clearInv':delete r.inv;save();render(true);break;
+  case 'sampleQuotes':sampleQuotes(r);break;
+  case 'tourStart':tourStart();break;
+  case 'tourAuto':tourAuto();break;
+  case 'tourExit':T.on=false;document.body.classList.remove('touring');render(true);break;
+  case 'tourMin':T.min=!T.min;tourSync();break;
+  case 'tourShow':tourShow();break;
+  case 'welcomeSkip':closeDoc();try{localStorage.setItem('siam-tour-seen','1')}catch(err){}break;
+  case 'pay':r.paid={date:today()};save();toast('Pembayaran dicatat. Pengadaan selesai.');render(true);break;
+ }
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#modal').innerHTML)closeDoc()});
+document.addEventListener('change',e=>{
+ const t=e.target;const r=UI.rid&&R(UI.rid);
+ if(t.dataset.d){UI.draft[t.dataset.d]=t.value;if(t.tagName==='SELECT')render(true);return}
+ if(t.dataset.it){const [k,f]=t.dataset.it.split('|');UI.draft.items[+k][f]=(f==='qty'||f==='est')?+t.value:t.value;render(true);return}
+ if(t.dataset.inv){const id=t.dataset.inv;if(t.checked){if(!r.invited.includes(id))r.invited.push(id)}else r.invited=r.invited.filter(x=>x!==id);save();render(true);return}
+ if(t.dataset.q){const [vid,f,k]=t.dataset.q.split('|');r.quotes[vid]=r.quotes[vid]||{p:[],pay:'NET 30',lead:'',war:'',tech:3};const q=r.quotes[vid];q.p=q.p||[];
+  if(f==='p')q.p[+k]=+t.value;else if(f==='lead'||f==='tech')q[f]=+t.value;else q[f]=t.value;save();render(true);return}
+ if(t.id==='pickWinner'){UI.pick=UI.pick||{};UI.pick[r.id]=t.value;render(true)}
+});
+document.addEventListener('input',e=>{const t=e.target;if(t.dataset.d&&t.tagName!=='SELECT')UI.draft[t.dataset.d]=t.value});
+document.addEventListener('submit',e=>{
+ if(e.target.id!=='prForm')return;e.preventDefault();const d=UI.draft;
+ const items=d.items.filter(i=>i.name.trim()&&+i.qty>0&&+i.est>0);const errs=[];
+ if(!d.requester.trim())errs.push('nama pemohon');if(!d.title.trim())errs.push('judul pengadaan');if(!d.just.trim())errs.push('justifikasi');if(!items.length)errs.push('minimal 1 barang dengan qty dan estimasi harga');
+ if(errs.length){$('#formErr').innerHTML=`<div class="note bad">Lengkapi dulu: ${errs.join(', ')}.</div>`;return}
+ S.seq.pr++;const t=items.reduce((a,i)=>a+i.qty*i.est,0);
+ const nr={id:'R'+Date.now(),prNo:'PR/2026/10/'+String(S.seq.pr).padStart(3,'0'),date:today(),requester:d.requester.trim(),dept:d.dept,cc:d.cc,needBy:d.needBy,cat:d.cat,title:d.title.trim(),just:d.just.trim(),
+  items:items.map(i=>({name:i.name.trim(),qty:+i.qty,uom:i.uom||'unit',est:+i.est})),approvals:chainFor(t).map(k=>({key:k,status:'pending',date:'',note:''})),invited:[],quotes:{},qcf:{decided:false}};
+ S.reqs.push(nr);if(T.on&&T.step===0)T.rid=nr.id;save();UI.draft=null;UI.rid=nr.id;UI.sub='pr';toast(nr.prNo+' dikirim untuk approval');go('detail');
+});
+
+/* ---------- GUIDED TOUR ---------- */
+const T={on:false,step:0,rid:null,min:false};
+const TOUR_PR={requester:'Rani Oktavia',dept:'Operasional',cc:'CC-610',needBy:'2026-11-10',cat:'IT Hardware & Lisensi',title:'Printer multifungsi lantai 2',just:'Printer lama rusak; 30 staf operasional harus mencetak di lantai 3.',items:[{name:'Printer multifungsi A3 laser, duplex, network',qty:2,uom:'unit',est:12500000},{name:'Toner original cadangan',qty:4,uom:'pcs',est:1350000}]};
+const TOUR=[
+ {t:'Karyawan mengajukan kebutuhan',d:'Rani dari tim Operasional butuh 2 printer. Form Purchase Request (PR) sudah kami isi. Tekan tombol yang berkedip: Kirim untuk approval.',sel:'#prForm button[type=submit]'},
+ {t:'Atasan dan Finance menyetujui',d:'Nilainya sekitar Rp30 juta, jadi sistem otomatis meminta 2 persetujuan. Anda berperan sebagai keduanya: tekan Setujui dua kali.',sel:'[data-act=approve]',sub:'pr'},
+ {t:'Minta penawaran ke 3 vendor',d:'Pembelian di atas Rp10 juta wajib membandingkan minimal 3 penawaran. Tekan Isi penawaran contoh untuk mengundang 3 vendor dan memasukkan harga mereka.',sel:'[data-act=sampleQuotes]',sub:'qcf'},
+ {t:'Bandingkan dan pilih pemenang',d:'Tabel QCF di atas menilai tiap vendor: harga 60%, kualitas 25%, waktu kirim 15%. Yang termurah belum tentu terbaik. Tekan Kunci QCF untuk memilih vendor rekomendasi.',sel:'[data-act=lockQcf]',sub:'qcf'},
+ {t:'Terbitkan Purchase Order',d:'PO terisi otomatis dari vendor pemenang, lengkap dengan PPN 11% dan termin bayar. Tekan Terbitkan PO.',sel:'[data-act=issuePo]',sub:'po'},
+ {t:'Catat barang yang diterima',d:'Saat printer datang, penerima mencatat jumlah yang benar-benar diterima (BAST). Tekan Simpan penerimaan.',sel:'[data-act=saveGr]',sub:'gr'},
+ {t:'Cocokkan tagihan vendor',d:'Sistem membandingkan PO, barang yang diterima, dan invoice (3-way match). Tagihan yang tidak cocok otomatis ditahan. Tekan Catat invoice.',sel:'[data-act=saveInv],[data-act=clearInv]',sub:'gr'},
+ {t:'Bayar vendor',d:'Semua cocok, jadi invoice aman dibayar sesuai termin. Tekan Tandai sudah dibayar.',sel:'[data-act=pay]',sub:'gr'}
+];
+function matchOk(r){return r.inv&&r.gr&&Math.abs(r.inv.amount-Math.round(grValue(r)*(1+PPN)))<=1}
+function tourDone(i){const r=T.rid&&R(T.rid);if(i===0)return !!r;if(!r)return false;
+ return [null,()=>r.approvals.every(a=>a.status==='ok'),()=>qcfRows(r).length>=3,()=>r.qcf&&r.qcf.decided,()=>!!r.po,()=>!!r.gr,()=>matchOk(r),()=>!!r.paid][i]()}
+function sampleQuotes(r){
+ const vs=S.vendors.filter(v=>v.cat===r.cat&&v.status==='Aktif').slice(0,3);
+ const prof=[{f:.97,pay:'NET 30',lead:5,war:'12 bulan, servis on-site',tech:5},{f:.93,pay:'NET 14',lead:10,war:'6 bulan',tech:3},{f:.99,pay:'NET 30',lead:7,war:'12 bulan',tech:4}];
+ vs.forEach((v,k)=>{if(!r.invited.includes(v.id))r.invited.push(v.id);const P=prof[k%3];r.quotes[v.id]={p:r.items.map(i=>Math.round(i.est*P.f/1000)*1000),pay:P.pay,lead:P.lead,war:P.war,tech:P.tech}});
+ save();toast(vs.length+' penawaran vendor dimasukkan');render(true);
+}
+function tourStart(){closeDoc();try{localStorage.setItem('siam-tour-seen','1')}catch(e){}T.on=true;T.step=0;T.rid=null;T.min=false;document.body.classList.add('touring');tourShow()}
+function tourShow(){
+ if(T.step===0){UI.view='new';UI.draft=JSON.parse(JSON.stringify(TOUR_PR));UI.sub=null}
+ else if(T.step<TOUR.length){UI.view='detail';UI.rid=T.rid;UI.sub=TOUR[T.step].sub}
+ else {UI.view='detail';UI.rid=T.rid;UI.sub='po'}
+ render(false);
+}
+function tourAuto(){
+ tourShow();
+ const st=TOUR[T.step];if(!st)return;
+ const el=document.querySelector(st.sel);if(el&&!el.disabled)el.click();
+}
+function tourSync(){
+ const host=$('#tourHost');
+ if(!T.on){host.innerHTML='';return}
+ let adv=false;while(T.step<TOUR.length&&tourDone(T.step)){T.step++;adv=true}
+ if(adv){setTimeout(tourShow,350);return}
+ document.querySelectorAll('.tour-hl').forEach(x=>x.classList.remove('tour-hl'));
+ if(T.min){host.innerHTML=`<button class="btn primary tour-pill" data-act="tourMin">Tur: langkah ${Math.min(T.step+1,TOUR.length)} dari ${TOUR.length} &#9650;</button>`;return}
+ const n=TOUR.length;
+ if(T.step>=n){
+  host.innerHTML=`<aside class="tour" role="dialog" aria-label="Tur panduan"><div class="prog">${TOUR.map(()=>'<i class="on"></i>').join('')}</div><span class="k">Selesai</span><h3>Satu pengadaan lengkap dalam beberapa menit</h3><p>Semua jejaknya tercatat: PR, persetujuan, perbandingan penawaran, PO, berita acara terima, dan verifikasi tagihan. Perusahaan Anda bisa punya proses seperti ini, dengan atau tanpa software.</p><div class="row"><button class="btn small" data-act="doc" data-d="po">Lihat dokumen PO</button><button class="btn small" data-act="doc" data-d="qcf">Lihat QCF</button></div><div class="row"><a class="btn primary" href="index.html#kontak">Konsultasi gratis 30 menit</a><button class="btn" data-act="tourExit">Tutup tur</button></div></aside>`;
+  return;
+ }
+ const st=TOUR[T.step];
+ const r=T.rid&&R(T.rid);
+ let extra='';
+ if(T.step===6&&r&&r.inv&&!matchOk(r))extra='<p class="note bad" style="font-size:13px">Tagihan tidak cocok, jadi sistem menahannya. Tekan Input ulang invoice lalu catat lagi dengan nilai yang benar.</p>';
+ host.innerHTML=`<aside class="tour" role="dialog" aria-label="Tur panduan"><div class="prog">${TOUR.map((_,i)=>`<i class="${i<=T.step?'on':''}"></i>`).join('')}</div><div class="row between"><span class="k">Langkah ${T.step+1} dari ${n}</span><button class="btn small" data-act="tourMin" aria-label="Kecilkan panduan">Kecilkan</button></div><h3>${st.t}</h3><p>${st.d}</p>${extra}<div class="row"><button class="btn primary" data-act="tourAuto">Lakukan untuk saya</button><button class="btn" data-act="tourShow">Tunjukkan tombolnya</button><button class="btn small" data-act="tourExit">Keluar tur</button></div></aside>`;
+ if(T.step===3){const n2=$('#qcfNote');if(n2&&!n2.value)n2.value='Skor tertinggi: kualitas dan waktu kirim terbaik dengan selisih harga kecil.'}
+ const el=document.querySelector(st.sel);
+ if(el){el.classList.add('tour-hl');const rc=el.getBoundingClientRect();if(rc.top<80||rc.bottom>window.innerHeight-300)el.scrollIntoView({block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}
+}
+function welcome(){
+ let seen=false;try{seen=localStorage.getItem('siam-tour-seen')==='1'}catch(e){}
+ if(seen)return;
+ $('#modal').innerHTML=`<div class="overlay" role="dialog" aria-modal="true" aria-label="Selamat datang"><div class="welcome"><span class="eyebrow">Demo e-procurement</span><h2>Lihat bagaimana pengadaan yang rapi bekerja</h2><p class="muted">Anda akan mengikuti 1 pembelian printer: diajukan, disetujui, dibandingkan dari 3 vendor, dipesan, diterima, lalu dibayar. Cukup tekan tombol yang ditunjukkan. Sekitar 3 menit.</p><button class="btn primary big" data-act="tourStart">&#9654; Mulai tur panduan</button><button class="btn big" data-act="welcomeSkip">Saya mau jelajahi sendiri</button><p class="muted" style="font-size:12.5px">Semua data fiktif. Isian Anda hanya tersimpan di perangkat ini.</p></div></div>`;
+}
+
+render();
+welcome();
+})();
+</script>
+
+</html>

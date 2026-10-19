@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Contoh hasil Procurement Health Check: potensi hemat, peta vendor, 10 temuan, dan rencana 90 hari.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contoh Laporan Health Check · Syamsul Siam">
+<meta property="og:description" content="Contoh hasil Procurement Health Check: potensi hemat, peta vendor, 10 temuan, dan rencana 90 hari.">
+<meta property="og:image" content="https://syamsulsiam.github.io/og.jpg">
+<meta property="og:url" content="https://syamsulsiam.github.io/contoh-laporan.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='29' fill='%23ffffff' stroke='%230E6A5B' stroke-width='5'/%3E%3Ctext x='32' y='41' font-family='Arial' font-weight='700' font-size='24' text-anchor='middle' fill='%230E6A5B'%3ESS%3C/text%3E%3C/svg%3E">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Contoh Laporan Health Check</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a report sheet on a quiet desk; one reading column, tables scroll inside their own box on phones */
+:root{
+  --paper:#F5F7F4; --card:#FFFFFF; --ink:#13201C; --muted:#56645F; --rule:#D6DDD8;
+  --stamp:#0E6A5B; --stamp-ink:#FFFFFF; --stamp-soft:#DCEEE8; --bar:#C3C8BB; --hi:#9A5B00; --hi-soft:#FBEBCF; --lo:#56645F;
+  --f-display:"Bricolage Grotesque","Plus Jakarta Sans",system-ui,sans-serif;
+  --f-body:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0E1513; --card:#16201D; --ink:#E6EEEA; --muted:#9CABA5; --rule:#2A3632;
+  --stamp:#48BFA5; --stamp-ink:#062019; --stamp-soft:#173A33; --bar:#3A4642; --hi:#E6AC4E; --hi-soft:#3A2C12; --lo:#9CABA5; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0E1513; --card:#16201D; --ink:#E6EEEA; --muted:#9CABA5; --rule:#2A3632;
+  --stamp:#48BFA5; --stamp-ink:#062019; --stamp-soft:#173A33; --bar:#3A4642; --hi:#E6AC4E; --hi-soft:#3A2C12; --lo:#9CABA5; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6}
+a{color:inherit}
+.w{max-width:880px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top{padding-block:16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;font-size:14px}
+.top a{font-weight:600;text-decoration:none;color:var(--muted)}
+.sheet{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:clamp(20px,5vw,48px);margin-bottom:40px}
+h1,h2{font-family:var(--f-display);letter-spacing:-.02em;text-wrap:balance;margin:0;line-height:1.12}
+h1{font-size:clamp(28px,5vw,40px);font-weight:800}
+h2{font-size:22px;font-weight:800;margin-top:40px;padding-top:24px;border-top:2px solid var(--ink)}
+p{margin:12px 0 0;max-width:68ch}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--stamp)}
+.flag{display:inline-block;background:var(--hi-soft);color:var(--hi);font-size:13px;font-weight:700;padding:4px 10px;border-radius:6px;margin-top:14px}
+.big{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin-top:24px}
+.big div{border-top:1px solid var(--rule);padding-top:10px}
+.big b{display:block;font-family:var(--f-display);font-size:30px;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1}
+.big span{font-size:14px;color:var(--muted)}
+ul{padding-left:20px;margin:12px 0 0}
+li{margin-top:6px}
+.chart{margin-top:18px;display:flex;flex-direction:column;gap:10px}
+.crow{display:grid;grid-template-columns:150px minmax(0,1fr) 120px;gap:12px;align-items:center;font-size:14px}
+@media (max-width:560px){.crow{grid-template-columns:minmax(0,1fr) 92px}.crow .track{grid-column:1/-1;order:3}}
+.track{display:flex;align-items:center;gap:8px;min-width:0}
+.track i{display:block;height:18px;border-radius:2px;background:var(--bar)}
+.crow.hi .track i{background:var(--stamp)}
+.track span{font-family:var(--f-mono);font-size:12.5px;white-space:nowrap}
+.crow .sv{text-align:right;font-variant-numeric:tabular-nums}
+.crow.hi .sv{font-weight:700}
+.chead{font-size:12px;color:var(--muted);font-weight:600}
+.tw{overflow-x:auto;margin-top:16px;border:1px solid var(--rule);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:var(--paper);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.r{text-align:right;white-space:nowrap}
+.pri{font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.pri.t{background:var(--hi-soft);color:var(--hi)}
+.pri.s{background:var(--stamp-soft);color:var(--stamp)}
+.pri.r2{background:var(--paper);color:var(--lo);border:1px solid var(--rule)}
+.phases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:16px}
+@media (max-width:700px){.phases{grid-template-columns:minmax(0,1fr)}}
+.phase{border:1px solid var(--rule);border-radius:8px;padding:16px}
+.phase b{font-family:var(--f-mono);font-size:12.5px;color:var(--stamp)}
+.phase ul{font-size:14.5px}
+.cta{margin-top:40px;background:var(--stamp-soft);border-radius:10px;padding:20px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.btn{display:inline-flex;align-items:center;padding:12px 18px;border-radius:8px;font-weight:700;text-decoration:none;background:var(--stamp);color:var(--stamp-ink)}
+.btn:focus-visible,a:focus-visible{outline:2px solid var(--stamp);outline-offset:3px}
+.fine{font-size:13px;color:var(--muted)}
+</style>
+
+<div class="w top"><a href="index.html">&larr; Syamsul Siam · Procurement Advisory</a><a href="demo.html">Coba demo e-procurement &rarr;</a></div>
+<main class="w">
+<article class="sheet">
+  <span class="eyebrow">Contoh deliverable · Procurement Health Check · 2 minggu</span>
+  <h1 style="margin-top:10px">Laporan Procurement Health Check</h1>
+  <p class="fine">PT Contoh Maju Bersama · startup B2B SaaS, 140 karyawan · data belanja Okt 2025 – Sep 2026</p>
+  <span class="flag">Perusahaan dan semua angka di laporan ini fiktif</span>
+
+  <h2>Ringkasan</h2>
+  <p>Potensi penghematan <b>± Rp1,27 miliar per tahun</b>, atau 6,9% dari belanja Rp18,4 miliar. Sekitar 60% bisa dicapai dalam 90 hari tanpa mengganti vendor inti.</p>
+  <div class="big">
+    <div><b>Rp18,4 M</b><span>belanja vendor 12 bulan</span></div>
+    <div><b>Rp1,27 M</b><span>potensi hemat per tahun</span></div>
+    <div><b>64%</b><span>PO &gt; Rp10 jt tanpa 3 penawaran</span></div>
+    <div><b>Rp86 jt</b><span>invoice dobel yang sudah terbayar</span></div>
+  </div>
+  <ul>
+    <li><b>Belanja terkonsentrasi.</b> 3 vendor teratas menyerap 55% belanja. Satu vendor cloud saja 28%.</li>
+    <li><b>Kontrak diperpanjang otomatis.</b> 9 dari 22 kontrak naik rata-rata 7% per tahun tanpa negosiasi.</li>
+    <li><b>Persetujuan tidak tercatat.</b> 38% pembelian disetujui lewat chat tanpa PR resmi.</li>
+  </ul>
+
+  <h2>Ke mana uangnya pergi</h2>
+  <p>Cloud dan software menyerap sepertiga belanja dan separuh potensi hemat.</p>
+  <div class="chart" role="table" aria-label="Belanja dan potensi hemat per kategori">
+    <div class="crow chead" role="row"><span>Kategori</span><span class="track">Belanja 12 bulan</span><span class="sv">Potensi hemat</span></div>
+    <div class="crow hi" role="row"><span>Cloud &amp; software</span><span class="track"><i style="width:62%"></i><span>Rp6,2 M</span></span><span class="sv">Rp620 jt</span></div>
+    <div class="crow" role="row"><span>Sewa kantor</span><span class="track"><i style="width:36%"></i><span>Rp3,6 M</span></span><span class="sv fine">kontrak s.d. 2028</span></div>
+    <div class="crow" role="row"><span>Marketing &amp; event</span><span class="track"><i style="width:23%"></i><span>Rp2,3 M</span></span><span class="sv">Rp184 jt</span></div>
+    <div class="crow" role="row"><span>Jasa profesional</span><span class="track"><i style="width:21%"></i><span>Rp2,1 M</span></span><span class="sv">Rp105 jt</span></div>
+    <div class="crow" role="row"><span>Facility &amp; keamanan</span><span class="track"><i style="width:18%"></i><span>Rp1,8 M</span></span><span class="sv">Rp144 jt</span></div>
+    <div class="crow" role="row"><span>IT hardware</span><span class="track"><i style="width:14%"></i><span>Rp1,4 M</span></span><span class="sv">Rp98 jt</span></div>
+    <div class="crow" role="row"><span>ATK &amp; lain-lain</span><span class="track"><i style="width:10%"></i><span>Rp1,0 M</span></span><span class="sv">Rp120 jt</span></div>
+  </div>
+
+  <h2>Vendor berisiko</h2>
+  <p>Dari 86 vendor aktif, 12 vendor menyerap 78% belanja. Lima di antaranya berisiko tinggi.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Vendor</th><th>Kategori</th><th class="r">Belanja/tahun</th><th>Risiko</th><th>Alasan</th></tr></thead>
+    <tbody>
+      <tr><td>Vendor A</td><td>Cloud</td><td class="r">Rp5,1 M</td><td><span class="pri t">Tinggi</span></td><td>Tanpa kontrak komitmen, tarif on-demand penuh</td></tr>
+      <tr><td>Vendor C</td><td>Event organizer</td><td class="r">Rp1,3 M</td><td><span class="pri t">Tinggi</span></td><td>Ditunjuk langsung 4 event berturut-turut</td></tr>
+      <tr><td>Vendor F</td><td>Reseller laptop</td><td class="r">Rp0,8 M</td><td><span class="pri t">Tinggi</span></td><td>Satu-satunya pemasok, tidak pernah RFQ</td></tr>
+      <tr><td>Vendor G</td><td>SaaS CRM</td><td class="r">Rp0,6 M</td><td><span class="pri t">Tinggi</span></td><td>31% lisensi tidak dipakai 90 hari</td></tr>
+      <tr><td>Vendor H</td><td>SaaS desain</td><td class="r">Rp0,4 M</td><td><span class="pri t">Tinggi</span></td><td>Bayar bulanan, padahal tahunan diskon 20%</td></tr>
+      <tr><td>Vendor D</td><td>Security &amp; cleaning</td><td class="r">Rp1,2 M</td><td><span class="pri s">Sedang</span></td><td>Diperpanjang otomatis, naik 8%</td></tr>
+      <tr><td>Vendor E</td><td>Kantor hukum</td><td class="r">Rp0,9 M</td><td><span class="pri s">Sedang</span></td><td>Tarif per jam tanpa batas atas</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Temuan dan rekomendasi</h2>
+  <p>Tiga temuan pertama menyumbang Rp804 jt, atau 63% potensi hemat.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Temuan</th><th class="r">Dampak/tahun</th><th>Rekomendasi</th><th>Prioritas</th></tr></thead>
+    <tbody>
+      <tr><td>Cloud dibayar tarif on-demand, 35% kapasitas menganggur</td><td class="r">Rp520 jt</td><td>Rightsizing + kontrak komitmen 1 tahun</td><td><span class="pri t">Tinggi</span></td></tr>
+      <tr><td>Event organizer ditunjuk tanpa pembanding</td><td class="r">Rp184 jt</td><td>RFQ 3 EO dengan brief standar</td><td><span class="pri t">Tinggi</span></td></tr>
+      <tr><td>Lisensi SaaS tidak terpakai, langganan bulanan</td><td class="r">Rp100 jt</td><td>Audit pemakaian, pindah ke paket tahunan</td><td><span class="pri t">Tinggi</span></td></tr>
+      <tr><td>Invoice dobel, tidak ada 3-way match</td><td class="r">Rp86 jt (sudah terjadi)</td><td>Wajib PO + BAST sebelum bayar; tagih balik</td><td><span class="pri t">Tinggi</span></td></tr>
+      <tr><td>Kontrak outsourcing naik 8% otomatis</td><td class="r">Rp144 jt</td><td>Tender ulang 90 hari sebelum habis</td><td><span class="pri s">Sedang</span></td></tr>
+      <tr><td>ATK dibeli eceran oleh tiap divisi</td><td class="r">Rp120 jt</td><td>Katalog dan pemesanan terpusat</td><td><span class="pri s">Sedang</span></td></tr>
+      <tr><td>Jasa hukum tanpa batas atas fee</td><td class="r">Rp105 jt</td><td>Fee bulanan dengan batas atas</td><td><span class="pri s">Sedang</span></td></tr>
+      <tr><td>Laptop dari satu reseller tanpa RFQ</td><td class="r">Rp98 jt</td><td>Kontrak harga tahunan dengan 2 vendor</td><td><span class="pri s">Sedang</span></td></tr>
+      <tr><td>38% pembelian disetujui lewat chat; PR ke PO rata-rata 19 hari</td><td class="r">Risiko audit</td><td>Matriks approval, template PR/QCF, SLA 7 hari</td><td><span class="pri s">Sedang</span></td></tr>
+      <tr><td>Tidak ada evaluasi kinerja vendor</td><td class="r">Kualitas tak terukur</td><td>Scorecard vendor tiap kuartal</td><td><span class="pri r2">Rendah</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Rencana 90 hari</h2>
+  <p>Target: Rp760 jt penghematan terkunci, dan semua pembelian di atas Rp10 juta lewat PR, QCF, dan PO.</p>
+  <div class="phases">
+    <div class="phase"><b>HARI 1–30 · QUICK WINS</b><ul><li>Matikan lisensi yang tidak dipakai</li><li>Rightsizing server cloud</li><li>Tagih balik invoice dobel</li><li>Berlakukan matriks approval</li></ul></div>
+    <div class="phase"><b>HARI 31–60 · SOURCING ULANG</b><ul><li>Kontrak komitmen cloud</li><li>RFQ 3 event organizer</li><li>Batas atas fee kantor hukum</li><li>Kontrak harga laptop</li></ul></div>
+    <div class="phase"><b>HARI 61–90 · KONTROL</b><ul><li>Wajib 3-way match</li><li>Katalog ATK terpusat</li><li>Jadwal tender ulang kontrak</li><li>Laporan hemat ke direksi</li></ul></div>
+  </div>
+
+  <div class="cta"><div><b>Mau tahu angka di perusahaan Anda?</b><p class="fine" style="margin-top:2px">Procurement Health Check · 2 minggu · Rp7,5 juta</p></div><a class="btn" href="index.html#kontak">Jadwalkan konsultasi gratis</a></div>
+  <p class="fine" style="margin-top:20px">Disusun oleh Syamsul Siam, S.H. · Procurement &amp; Commercial Consultant</p>
+</article>
+</main>
+
+</html>
