@@ -3,59 +3,42 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>BeliRapi · Sistem e-Procurement</title>
-<meta name="description" content="BeliRapi: demo sistem pengadaan dari Purchase Request sampai pembayaran, plus Starter Kit template Excel.">
+<title>BeliRapi · Sistem Belanja Kantor</title>
+<meta name="description" content="Sistem sederhana supaya setiap pembelian tercatat, dibandingkan, dan disetujui.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="BeliRapi · Sistem e-Procurement">
-<meta property="og:description" content="BeliRapi: demo sistem pengadaan dari Purchase Request sampai pembayaran, plus Starter Kit template Excel.">
+<meta property="og:title" content="BeliRapi · Sistem Belanja Kantor">
+<meta property="og:description" content="Sistem sederhana supaya setiap pembelian tercatat, dibandingkan, dan disetujui.">
 <meta property="og:image" content="https://syamsulsiam.github.io/og.jpg">
-<meta property="og:url" content="https://syamsulsiam.github.io/belirapi.html">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='29' fill='%23ffffff' stroke='%230E6A5B' stroke-width='5'/%3E%3Ctext x='32' y='41' font-family='Arial' font-weight='700' font-size='24' text-anchor='middle' fill='%230E6A5B'%3ESS%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="nav"><div class="w">
-  <a class="who" href="index.html"><span class="seal" aria-hidden="true">SS</span><span>Syamsul Siam · Procurement Advisory</span></a>
-  <a class="btn sm solid" href="kontak.html">Konsultasi gratis</a>
-  <nav class="tabs" aria-label="Menu"><a href="index.html">Beranda</a><a href="layanan.html">Layanan</a><a href="belirapi.html" aria-current="page">BeliRapi</a><a href="tentang.html">Tentang</a><a href="kontak.html">Kontak</a></nav>
+  <a class="who" href="index.html"><span class="seal" aria-hidden="true">SS</span><span>Syamsul Siam</span></a>
+  <nav class="tabs" aria-label="Menu"><a href="index.html">Beranda</a><a href="layanan.html">Layanan</a><a href="belirapi.html" aria-current="page">BeliRapi</a><a href="tentang.html">Tentang</a></nav>
+  <a class="btn sm wa" href="https://wa.me/6287887625841?text=Halo%20Pak%20Syamsul%2C%20saya%20ingin%20ngobrol%20gratis%2030%20menit%20soal%20belanja%20di%20perusahaan%20saya." target="_blank" rel="noopener">WhatsApp</a>
 </div></header>
-<main>
-<section class="pagehead"><div class="w"><span class="eyebrow">Produk</span><h1>BeliRapi</h1><p class="lead">Sistem dan template pengadaan yang membuat proses beli di perusahaan Anda rapi, tercatat, dan hemat.</p></div></section>
-<section id="demo"><div class="w demo">
-  <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
-    <span class="eyebrow">Coba langsung</span>
-    <h2>BeliRapi: sistem e-procurement yang mudah dipakai</h2>
-    <p class="lead">Ikuti tur 3 menit: satu pembelian printer dari diajukan, disetujui, dibandingkan dari 3 vendor, sampai dibayar. Cukup tekan tombol yang ditunjukkan. Bisa dibuka di HP.</p>
-    <div class="ctas"><a class="btn solid" href="demo.html">Coba BeliRapi</a><a class="btn" id="hcLink" href="contoh-laporan.html">Lihat contoh laporan</a></div>
+<main><div class="w">
+<div class="grid2">
+  <div class="stack">
+    <span class="eyebrow">Produk</span>
+    <h1>BeliRapi</h1>
+    <p class="lead">Sistem sederhana supaya hemat yang sudah didapat tidak bocor lagi.</p>
+    <ul class="ticks"><li>Setiap permintaan beli tercatat dan disetujui</li><li>3 penawaran dibandingkan otomatis</li><li>Tagihan dicek dulu sebelum dibayar</li></ul>
+    <div class="ctas"><a class="btn solid" href="demo.html">&#9654; Coba demo 3 menit</a><a class="btn" href="https://wa.me/6287887625841?text=Halo%20Pak%20Syamsul%2C%20saya%20ingin%20BeliRapi%20Starter%20Kit%20%28Excel%29." target="_blank" rel="noopener">Starter Kit Excel · Rp750 rb</a></div>
   </div>
-  <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
-    <div class="flow"><span class="s">Purchase Request</span><span class="a">→</span><span class="s">Approval berjenjang</span><span class="a">→</span><span class="s">RFQ</span><span class="a">→</span><span class="s">QCF & skoring</span><span class="a">→</span><span class="s">PO</span><span class="a">→</span><span class="s">BAST</span><span class="a">→</span><span class="s">3-way match</span><span class="a">→</span><span class="s">Bayar</span></div>
-    <p class="small">Dokumen yang sudah disiapkan:</p>
-    <div class="doclist"><span>PR</span><span>RFQ</span><span>QCF</span><span>BA Negosiasi</span><span>PO</span><span>SPK</span><span>BAST</span><span>3-Way Match</span><span>Form Vendor</span><span>Evaluasi Vendor</span><span>Pakta Integritas</span></div>
+  <div class="card stack" style="gap:12px">
+    <h3>Alurnya</h3>
+    <div class="flow"><span>Minta beli</span><i>→</i><span>Disetujui</span><i>→</i><span>Banding 3 harga</span><i>→</i><span>Pesan</span><i>→</i><span>Barang diterima</span><i>→</i><span>Cek tagihan</span><i>→</i><span>Bayar</span></div>
+    <p class="small">Bisa dibuka di HP. Semua data di demo adalah contoh.</p>
   </div>
-</div></section>
-<section><div class="w">
-  <div class="offer">
-    <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
-      <span class="eyebrow">Toolkit siap pakai</span>
-      <h2>BeliRapi Starter Kit</h2>
-      <p>Template Excel yang saya pakai sehari-hari, sudah dengan rumus. Isi, cetak, dan langsung dipakai tim Anda.</p>
-      <ul><li>Purchase Request</li><li>QCF dengan skoring otomatis</li><li>Purchase Order + PPN</li><li>BAST / Goods Receipt</li><li>Evaluasi kinerja vendor</li><li>Daftar vendor (vendor master)</li><li>Matriks approval</li><li>Panduan pemakaian</li></ul>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start">
-      <p style="font-family:var(--f-display);font-size:32px;font-weight:800;line-height:1">Rp750 rb</p>
-      <p class="small">Gratis untuk klien paket mana pun.</p>
-      <a class="btn solid" href="kontak.html?paket=BeliRapi%20Starter%20Kit">Pesan toolkit</a>
-    </div>
-  </div>
-</div></section>
-</main>
-<div class="next"><div class="w"><div><span class="small">Langkah berikutnya</span><br><b>Lihat sendiri cara kerjanya</b></div><a class="btn solid" href="demo.html">Coba demo 3 menit</a></div></div>
-<footer><div class="w"><span>© 2026 Syamsul Siam, S.H. · Procurement & Commercial Consultant · Bogor</span><span>Hasil masa lalu tidak menjamin hasil yang sama di setiap perusahaan.</span></div></footer>
+</div>
+</div></main>
+<footer><div class="w"><span>© 2026 Syamsul Siam, S.H. · Konsultan pengadaan · Bogor</span><span>WA +62 878-8762-5841 · syamsulsiam@gmail.com</span></div></footer>
 <div id="t"></div>
 <script src="app.js"></script>
 </body>
