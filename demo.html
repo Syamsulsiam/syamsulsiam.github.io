@@ -28,16 +28,6 @@
   --f-body:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#101614; --surface:#18201D; --sunk:#202A27; --ink:#E5ECE9; --muted:#9AA8A2; --line:#2D3834;
-  --accent:#43B79F; --accent-ink:#06201A; --accent-soft:#163A33;
-  --ok:#5DCB86; --ok-soft:#173726; --warn:#E6AC4E; --warn-soft:#3A2C12; --bad:#F07A80; --bad-soft:#3E1A1C; --info:#8FB0F2; --info-soft:#1B2740;
-  color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#101614; --surface:#18201D; --sunk:#202A27; --ink:#E5ECE9; --muted:#9AA8A2; --line:#2D3834;
-  --accent:#43B79F; --accent-ink:#06201A; --accent-soft:#163A33;
-  --ok:#5DCB86; --ok-soft:#173726; --warn:#E6AC4E; --warn-soft:#3A2C12; --bad:#F07A80; --bad-soft:#3E1A1C; --info:#8FB0F2; --info-soft:#1B2740;
-  color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.5}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
@@ -118,7 +108,7 @@ input.cell.s{width:64px}
 .doclist{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
 .doccard{display:flex;flex-direction:column;gap:8px;justify-content:space-between}
 .code{font-family:var(--f-mono);font-size:11.5px;color:var(--accent);font-weight:500}
-.cta{margin-top:28px;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;background:var(--ink);color:var(--bg);border-radius:12px;padding:18px}
+.cta{margin-top:28px;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;background:var(--accent-soft);color:var(--ink);border-radius:12px;padding:18px}
 .cta .muted{color:inherit;opacity:.75}
 .cta .btn{background:transparent;color:inherit;border-color:currentColor}
 .contact{display:flex;flex-wrap:wrap;gap:8px}
@@ -534,7 +524,7 @@ function vDocs(){
  ${ctaBlock()}`;
 }
 function ctaBlock(){return `<section class="cta"><div style="min-width:0;max-width:560px"><div class="eyebrow" style="color:inherit;opacity:.7">Dibangun oleh</div><h2 style="color:inherit">Syamsul Siam, S.H. · Procurement & Commercial Consultant</h2><p class="muted" style="margin-top:4px">13+ tahun memimpin procurement di fintech, SaaS, rumah sakit, dan properti. Saya bantu perusahaan menyiapkan SOP, dokumen, dan sistem pengadaan seperti demo ini.</p></div>
- <div class="contact"><a class="btn small" href="index.html#kontak">Jadwalkan konsultasi</a><button class="btn small" data-act="copy" data-t="syamsulsiam@gmail.com">syamsulsiam@gmail.com</button><button class="btn small" data-act="copy" data-t="+62 878-8762-5841">+62 878-8762-5841</button></div></section>`}
+ <div class="contact"><a class="btn small" href="kontak.html">Jadwalkan konsultasi</a><button class="btn small" data-act="copy" data-t="syamsulsiam@gmail.com">syamsulsiam@gmail.com</button><button class="btn small" data-act="copy" data-t="+62 878-8762-5841">+62 878-8762-5841</button></div></section>`}
 
 /* ---------- PAPER DOCUMENTS ---------- */
 function kop(){return `<div class="kop"><div><b>${COMPANY.name}</b><div>${COMPANY.addr}</div><div>NPWP ${COMPANY.npwp}</div></div><div style="text-align:right;color:#555">Dokumen sistem<br>BeliRapi</div></div>`}
@@ -731,7 +721,7 @@ function tourSync(){
  if(T.min){host.innerHTML=`<button class="btn primary tour-pill" data-act="tourMin">Tur: langkah ${Math.min(T.step+1,TOUR.length)} dari ${TOUR.length} &#9650;</button>`;return}
  const n=TOUR.length;
  if(T.step>=n){
-  host.innerHTML=`<aside class="tour" role="dialog" aria-label="Tur panduan"><div class="prog">${TOUR.map(()=>'<i class="on"></i>').join('')}</div><span class="k">Selesai</span><h3>Satu pengadaan lengkap dalam beberapa menit</h3><p>Semua jejaknya tercatat: PR, persetujuan, perbandingan penawaran, PO, berita acara terima, dan verifikasi tagihan. Perusahaan Anda bisa punya proses seperti ini, dengan atau tanpa software.</p><div class="row"><button class="btn small" data-act="doc" data-d="po">Lihat dokumen PO</button><button class="btn small" data-act="doc" data-d="qcf">Lihat QCF</button></div><div class="row"><a class="btn primary" href="index.html#kontak">Konsultasi gratis 30 menit</a><button class="btn" data-act="tourExit">Tutup tur</button></div></aside>`;
+  host.innerHTML=`<aside class="tour" role="dialog" aria-label="Tur panduan"><div class="prog">${TOUR.map(()=>'<i class="on"></i>').join('')}</div><span class="k">Selesai</span><h3>Satu pengadaan lengkap dalam beberapa menit</h3><p>Semua jejaknya tercatat: PR, persetujuan, perbandingan penawaran, PO, berita acara terima, dan verifikasi tagihan. Perusahaan Anda bisa punya proses seperti ini, dengan atau tanpa software.</p><div class="row"><button class="btn small" data-act="doc" data-d="po">Lihat dokumen PO</button><button class="btn small" data-act="doc" data-d="qcf">Lihat QCF</button></div><div class="row"><a class="btn primary" href="kontak.html">Konsultasi gratis 30 menit</a><button class="btn" data-act="tourExit">Tutup tur</button></div></aside>`;
   return;
  }
  const st=TOUR[T.step];
