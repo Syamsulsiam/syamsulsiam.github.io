@@ -153,7 +153,7 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .next{border-top:1px solid var(--rule);padding-block:28px}
 .next .w{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
 .next b{font-family:var(--f-display);font-size:20px}
-.start{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px}
+.start{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px}
 a.go{text-decoration:none;display:flex;flex-direction:column;gap:8px;background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:20px;min-width:0}
 a.go:hover{border-color:var(--stamp)}
 a.go .arrow{margin-top:auto;color:var(--stamp);font-weight:700}
